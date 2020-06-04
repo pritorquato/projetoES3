@@ -1,7 +1,7 @@
 # projetoES3
 Projeto final de Engenharia de Software 3
 
-# 1. REQUISITOS FUNCIONAIS – FORNECEDORES
+## 1. REQUISITOS FUNCIONAIS – FORNECEDORES
 ### Grupo:   Cadastro de fornecedores - RA PAR (DO PRIMEIRO NOME EM ORDEM ALFABÉTICA) 
 | Codigo  |  Nome 	| Descrição 	|
 |-	|-	|-	|
@@ -12,7 +12,7 @@ Projeto final de Engenharia de Software 3
 |     RF0026    	|     Cadastro de endereços de   entrega    	|     Deve   ser possível associar diversos endereços de entrega ao cadastro de um produto.   Cada cadastro de endereço deve ser identificado com um nome composto de uma   frase curta.     	|
 |     RF0027    	|     Cadastro de produtos    	|     Deve   ser possível associar diversos produtos ao cadastro de um fornecedor. Deve   haver um produto configurado como padrão.     	|
 |     RF0028    	|     Alteração apenas de senha    	|     O   sistema deve possibilitar que a senha do usuário do fornecedor seja alterada   sem que seja necessária a alteração de todos os dados cadastrais.     	|
-# 2. REQUISITOS NÃO FUNCIONAIS - FORNECEDORES
+## 2. REQUISITOS NÃO FUNCIONAIS - FORNECEDORES
 ###  Grupo: Geral
 | Codigo  |  Nome 	| Descrição 	|
 |-	|-	|-	|
@@ -26,7 +26,7 @@ Projeto final de Engenharia de Software 3
 |-	|-	|-	|
 |     RF0034    	|     Alteração apenas de   endereços     	|     O   sistema deve possibilitar que endereços de entrega ou cobrança possam ser   alterados ou adicionados de forma simples sem a necessidade da edição dos   demais dados cadastrais.     	|
 |     RNF0035    	|     Código de fornecedor    	|     Todo   fornecedor cadastrado deve receber um código único no sistema.    	|
-# 3. REGRAS DE NEGÓCIO – FORNECEDORES
+## 3. REGRAS DE NEGÓCIO – FORNECEDORES
 ### Grupo:   Cadastro de fornecedor 
 | Codigo  |  Nome 	| Descrição 	|
 |-	|-	|-	|
