@@ -1,0 +1,20 @@
+Projeto final - 1° Parte
+Vence 17 de junho de 2020 23:59
+Instruções
+Criar diagrama de classe completo e diagrama de sequência para o projeto de CRUD utilizando todos os padrões de projeto aprendidos em aula.
+
+Cada aluno ou dupla deverá utilizar um grupo de requisitos conforme documento em anexo. Os alunos com RA terminados com número PAR ou a dupla em o primeiro nome em ordem alfabética for PAR deverá fazer o desenvolvimento do cadastro de fornecedores.
+
+Os alunos com RA terminados em ÍMPAR ou a dupla em que o primeiro nome em ordem alfabética for ÍMPAR deverá desenvolver o cadastro de produtos.
+
+
+
+
+Projeto final - 2° Parte
+Vence 1 de julho de 2020 22:00
+Instruções
+Implementar CRUD utilizando todos os padrões de projeto aprendidos em aula. 
+
+Cada aluno ou dupla deverá utilizar um grupo de requisitos conforme documento em anexo. Os alunos com RA terminados com número PAR ou a dupla em o primeiro nome em ordem alfabética for PAR deverá fazer o desenvolvimento do cadastro de fornecedores. Os alunos com RA terminados em ÍMPAR ou a dupla em que o primeiro nome em ordem alfabética for ÍMPAR deverá desenvolver o cadastro de produtos.
+
+Será agendado um horário para cada apresentação.
