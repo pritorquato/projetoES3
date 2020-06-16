@@ -1,0 +1,76 @@
+
+
+
+CREATE TABLE fornecedor(
+codigo_fornecedor int AUTO_INCREMENT,
+endereco_fornecedor varchar(60),
+ produtos_fornecedor varchar(90),
+ produto_padrao_fornecedor varchar(90),
+ genero_fornecedor varchar(20),
+ nome_fornecedor varchar(40),
+ data_nascimento_fornecedor datetime,
+ cpf_fornecedor varchar(12),
+ telefone_fornecedor varchar(15),
+ email_fornecedor varchar(30),
+ ranking_fornecedor double,
+PRIMARY KEY (codigo_fornecedor)
+);
+
+CREATE TABLE produto(
+codigo_produto  int AUTO_INCREMENT,
+endereco_entrega VARCHAR(30),
+produto_padrao BOOLEAN,
+PRIMARY KEY (codigo_produto)
+);
+
+CREATE TABLE usuario(
+id_usuario int AUTO_INCREMENT,
+senha_usuario varchar(60),
+PRIMARY KEY (id_usuario)
+);
+
+CREATE TABLE endereco(
+codigo_endereco int AUTO_INCREMENT,
+nome_endereco varchar(60),
+tipo_endereco varchar(20),
+tipo_logradouro varchar(10),
+tipo_residencia varchar(20),
+logradouro_endereco varchar(40),
+numero_endereco int(5),
+bairro_endereco varchar(10),
+cep_endereco varchar(9),
+observacoes_endereco varchar(40),
+PRIMARY KEY (codigo_endereco)
+);
+
+CREATE TABLE telefone(
+id_telefone int AUTO_INCREMENT,
+tipo_telefone int,
+ddd_telefone varchar(5),
+numero_telefone varchar(10),
+PRIMARY KEY (id_telefone)
+);
+
+
+CREATE TABLE cartao(
+id_cartao int AUTO_INCREMENT,
+numero_cartao varchar(16),
+nome_cartao varchar(20),
+bandeira_cartao varchar(10),
+codigo_seguranca_cartao varchar(3),
+PRIMARY KEY (id_cartao)
+);
+
+
+alter table fornecedor add column endereco_id int;
+alter table fornecedor add foreign key (endereco_id) references endereco(codigo_endereco);
+
+alter table fornecedor add column produtos_fornecedor_id int;
+alter table fornecedor add foreign key (produtos_fornecedor_id) references produto(codigo_produto);
+
+alter table fornecedor add column telefone_fornecedor_id int;
+alter table fornecedor add foreign key (telefone_fornecedor_id) references telefone(id_telefone);
+
+alter table fornecedor add column cartao_fornecedor_id int;
+alter table fornecedor add foreign key (cartao_fornecedor_id) references cartao(id_cartao);
+
