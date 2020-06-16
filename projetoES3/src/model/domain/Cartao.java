@@ -1,3 +1,4 @@
+package model.domain;
 public class Cartao {
 
 	private String numeroCartao;

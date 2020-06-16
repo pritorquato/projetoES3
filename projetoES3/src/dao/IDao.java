@@ -1,3 +1,4 @@
+package dao;
 public interface IDao {
 
 	public abstract boolean cadastrar();

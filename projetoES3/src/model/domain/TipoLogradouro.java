@@ -1,3 +1,4 @@
+package model;
 public class TipoLogradouro {
 
 	private String tipoLogradouro;

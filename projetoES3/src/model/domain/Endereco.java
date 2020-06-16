@@ -1,3 +1,5 @@
+package model.domain;
+
 public class Endereco {
 
 	private int codEnd;

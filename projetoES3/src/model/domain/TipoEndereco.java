@@ -1,3 +1,4 @@
+package model;
 public class TipoEndereco {
 
 	private String descricaoEndereco;
