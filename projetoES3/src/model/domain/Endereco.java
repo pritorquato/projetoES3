@@ -1,29 +1,127 @@
 package model.domain;
 
-public class Endereco {
 
-	private int codEnd;
+public class Endereco extends EntidadeDominio{
 
+	//private int codEnd;
 	private String nomeEnd;
-
-	private TipoEndereco tipoEnd;
-
-	private TipoLogradouro tipoLogradouro;
-
-	private TipoResidencia tipoResidencia;
-
+	private String tipoEnd;
+	private String tipoLogr;
+	private String tipoResid;
 	private String logradouroEnd;
-
 	private int numeroEnd;
-
 	private String bairroEnd;
-
 	private String cepEnd;
-
+	private Cidade cidadeEnd;
 	private String observacoesEnd;
 
-	public void Endereco(String nomeEnd, TipoEndereco tipoEnd, TipoLogradouro tipoLogradouro, TipoResidencia tipoResidencia, int numeroEnd, String bairroEnd, String cepEnd, String observacoes) {
 
+	public Endereco(String nomeEnd, String tipoEnd, String tipoLogr, 
+			String tipoResid, String logradouroEnd, int numeroEnd, String bairroEnd,
+			String cepEnd, Cidade cidadeEnd, String observacoesEnd) {
+		//this.codEnd = codEnd;
+		this.nomeEnd = nomeEnd;
+		this.tipoEnd = tipoEnd;
+		this.tipoLogr = tipoLogr;
+		this.tipoResid = tipoResid;
+		this.logradouroEnd = logradouroEnd;
+		this.numeroEnd = numeroEnd;
+		this.bairroEnd = bairroEnd;
+		this.cepEnd = cepEnd;
+		this.cidadeEnd  = cidadeEnd;
+		this.observacoesEnd = observacoesEnd;
 	}
 
+
+//	public int getCodEnd() {
+//		return codEnd;
+//	}
+//
+//	public void setCodEnd(int codEnd) {
+//		this.codEnd = codEnd;
+//	}
+
+	public String getNomeEnd() {
+		return nomeEnd;
+	}
+
+	public void setNomeEnd(String nomeEnd) {
+		this.nomeEnd = nomeEnd;
+	}
+
+	public String getTipoEnd() {
+		return tipoEnd;
+	}
+
+	public void setTipoEnd(String tipoEnd) {
+		this.tipoEnd = tipoEnd;
+	}
+
+	public String getTipoLogr() {
+		return tipoLogr;
+	}
+
+	public void setTipoLogr(String tipoLogr) {
+		this.tipoLogr = tipoLogr;
+	}
+
+	public String getTipoResid() {
+		return tipoResid;
+	}
+
+	public void setTipoResid(String tipoResid) {
+		this.tipoResid = tipoResid;
+	}
+
+	public String getLogradouroEnd() {
+		return logradouroEnd;
+	}
+
+	public void setLogradouroEnd(String logradouroEnd) {
+		this.logradouroEnd = logradouroEnd;
+	}
+
+	public int getNumeroEnd() {
+		return numeroEnd;
+	}
+
+	public void setNumeroEnd(int numeroEnd) {
+		this.numeroEnd = numeroEnd;
+	}
+
+	public String getBairroEnd() {
+		return bairroEnd;
+	}
+
+	public void setBairroEnd(String bairroEnd) {
+		this.bairroEnd = bairroEnd;
+	}
+
+	public String getCepEnd() {
+		return cepEnd;
+	}
+
+	public void setCepEnd(String cepEnd) {
+		this.cepEnd = cepEnd;
+	}
+
+	public Cidade getCidadeEnd() {
+		return cidadeEnd;
+	}
+
+	public void setCidadeEnd(Cidade cidadeEnd) {
+		this.cidadeEnd = cidadeEnd;
+	}
+	
+	public String getObservacoesEnd() {
+		return observacoesEnd;
+	}
+
+	public void setObservacoesEnd(String observacoesEnd) {
+		this.observacoesEnd = observacoesEnd;
+	}
+
+	
+	
+	
 }

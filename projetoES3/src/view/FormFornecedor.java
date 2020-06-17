@@ -1,40 +1,205 @@
 package view;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Scanner;
+
+import control.FachadaFornecedor;
+import control.IFachada;
+import dao.FornecedorDao;
+import dao.IDao;
+import model.Log;
+import model.domain.BandeiraCartao;
+import model.domain.Cartao;
+import model.domain.Cidade;
+import model.domain.Fornecedor;
+import model.domain.Pais;
+import model.domain.Produto;
+import model.domain.Telefone;
+import model.domain.Endereco;
+import model.domain.Estado;
+
 import javax.swing.*;
 
 public class FormFornecedor{
 
-	private JTextField txtNome;
-	private JTextField txtDataNasc;
-	private JTextField txtCpf;
-	private JTextField txtGenero;
-	private JTextField txtNomeEndereco;
-	private JTextField txtLogradouro;
-	private JTextField txtNumero;
-	private JTextField txtCep;
-	private JTextField txtTelefone;
-	private JTextField txtDddTelefone;
-	private JTextField txtRanking;
-	private JTextField txtSenha;
-	private JTextField txtConfirmacaoSenha;
-	private JTextField txtNumeroCartao;
-	private JTextField txtNomeCartao;
-	private JTextField txtCodSegCartao;
-	private JList cbTipoEndereco;
-	private JList cbTipoResidencia;
-	private JList cbTipoLogradouro;
-	private JList cbBairro;
-	private JList cbCidade;
-	private JList cbEstado;
-	private JList cbPais;
-	private JList cbTipoTelefone;
-	private JList cbProduto;
-	private JList cbBandeiraCartao;
+	private int codForn;
+	private String nomeForn;
+	private String cpfForn;
+	private String generoForn;
+	private String dataNascForn;
+	private String tipoEnderecoForn; //tipoEndereço: cobrança ou entrega
+	private String nomeEnderecoForn; //frase curta
+	private String tipoResidenciaForn; //tipoResidencia: casa, apto, galpão
+	private String tipoLogradouroForn; //tipoLogradouro: rua, avenida, estrada
+	private String logradouroForn;
+	private int numeroEnderecoForn;
+	private String cepForn;
+	private String bairro;
+	private String cidadeForn;
+	private String estadoForn;
+	private String paisForn;
+	private String observacoes;
+	private String tipoTelefoneForn;
+	private String dddTelefoneForn;
+	private String telefoneForn;
+	private String emailForn;
+
+	private int codProdForn;
+	private String produtosForn;
+	private boolean produtoPadraoForn;
+	
+	private double rankingForn;
+	private String senhaForn;
+	private String confirmacaoSenhaForn;
+	private String bandeiraCartao;
+	private String numeroCartao;
+	private String nomeCartao;
+	private int codSegCartao;
+	
+
 	private JButton btAdicionarEndereco;
 	private JButton btAdicionarCartao;
 	private JButton btAdicionarTelefone;
 	private JButton btSalvar;
 
+	
+	public static void main(String[] args) {
+		FormFornecedor frmForn = new FormFornecedor();
+		
+		Scanner sc = new Scanner(System.in);		
+		
+		System.out.print("Digite o genero (alimentício, higiene, papelaria, construção etc): ");		
+		frmForn.generoForn = sc.next();
+		
+		System.out.print("Digite o nome do fornecedor: ");		
+		frmForn.nomeForn = sc.next();		
+		
+		System.out.print("Digite o cpf: ");		
+		frmForn.cpfForn = sc.next();
+				
+		System.out.print("Digite o data de nascimento (dd/mm/aaaa): ");		
+		frmForn.dataNascForn = sc.next();
+		
+		System.out.print("Digite o tipo de endereço (cobrança ou entrega): ");		
+		frmForn.tipoEnderecoForn = sc.next();
+		
+		System.out.print("Digite o nome do endereço: ");		
+		frmForn.nomeEnderecoForn = sc.next();
+		
+		System.out.print("Digite o tipo de residência (casa, apartamento etc): ");		
+		frmForn.tipoResidenciaForn = sc.next();
+		
+		System.out.print("Digite o tipo de logradouro (rua, avenida, estrada etc): ");		
+		frmForn.tipoLogradouroForn = sc.next();
+	
+		System.out.print("Digite o logradouro: ");		
+		frmForn.logradouroForn= sc.next();
+		
+		System.out.print("Digite o numero da residência: ");		
+		frmForn.numeroEnderecoForn = sc.nextInt();
+	
+		System.out.print("Digite o CEP: ");		
+		frmForn.cepForn = sc.next();
+	
+		System.out.print("Digite o bairro: ");		
+		frmForn.bairro = sc.next();
+	
+		System.out.print("Digite a cidade: ");		
+		frmForn.cidadeForn = sc.next();
+	
+		System.out.print("Digite o estado: ");		
+		frmForn.estadoForn = sc.next();
+	
+		System.out.print("Digite o país: ");		
+		frmForn.paisForn = sc.next();
+		
+		System.out.print("Digite observações sobre o endereço (opcional): ");		
+		frmForn.observacoes = sc.next();
+	
+		System.out.print("Digite o tipo de telefone (residencial, celular, comercial etc): ");		
+		frmForn.tipoTelefoneForn = sc.next();
+	
+		System.out.print("Digite o ddd: ");		
+		frmForn.dddTelefoneForn = sc.next();
+	
+		System.out.print("Digite o telefone: ");		
+		frmForn.telefoneForn = sc.next();
+
+		System.out.print("Digite o email: ");		
+		frmForn.emailForn = sc.next();
+
+//		System.out.print("Digite os codigos dos produtos do fornecedor: ");		
+//		frmForn.codProdForn = sc.nextInt();
+//
+//		System.out.print("Digite o produto padrão: ");		
+//		frmForn.produtoPadraoForn = sc.next();
+//		
+// PROBLEMA: preencher um array em tempo de execução, com informações de produto, 
+//		sem quantidade especificada
+		
+		
+		
+
+
+		System.out.print("Digite o ranking do fornecedor: ");		
+		frmForn.rankingForn = sc.nextDouble();
+
+		System.out.print("Digite a bandeira do cartão: ");		
+		frmForn.bandeiraCartao = sc.next();
+		
+		System.out.print("Digite o numero do cartão: ");		
+		frmForn.numeroCartao = sc.next();
+		
+		System.out.print("Digite o nome do titular do cartão: ");		
+		frmForn.nomeCartao = sc.next();
+		
+		System.out.print("Digite o código de segurança do cartão: ");		
+		frmForn.codSegCartao = sc.nextInt();
+
+		System.out.print("Digite o senha: ");		
+		frmForn.senhaForn = sc.next();
+		
+		System.out.print("Confirme sua senha: ");		
+		frmForn.confirmacaoSenhaForn = sc.next();
+
+		
+		Fornecedor fornecedor = frmForn.definirFornecedor();
+		
+		IFachada fachada = new FachadaFornecedor();
+		fachada.salvar(fornecedor);
+		
+	}
+		
+	
+		private Fornecedor definirFornecedor() {
+		
+			Pais pais = new Pais(paisForn);
+			Estado estado = new Estado(estadoForn, pais);
+			Cidade cidade = new Cidade(cidadeForn, estado);
+			
+			Endereco endereco = new Endereco(nomeEnderecoForn, tipoEnderecoForn, tipoLogradouroForn, 
+					tipoResidenciaForn, logradouroForn, numeroEnderecoForn, bairro, cepForn, cidade, observacoes); 
+			
+			Cartao cartao = new Cartao(numeroCartao, nomeCartao, bandeiraCartao, codSegCartao);
+			
+			
+			Telefone telefone = new Telefone();
+			
+//			Produto produto = new Produto(codProdForn, produtoPadraoForn);
+
+					
+			Fornecedor fornecedor = new Fornecedor(nomeForn, cpfForn, generoForn, dataNascForn, endereco, telefone, 
+					emailForn, rankingForn, senhaForn, confirmacaoSenhaForn, cartao);			
+							
+			return fornecedor;
+		}
+		
+		
+		
+		
+		
 	
 	public void gerarLog() {
 
@@ -44,73 +209,9 @@ public class FormFornecedor{
 
 	}
 
-	private Fornecedor definirFornecedor() {
-		return null;
-	}
+
 
 }
 
 
-private String nome;
-private String cpf;
-private double credito;
-private char sexo; 
-private String logradouro;
-private String cep;
-private String complemento;
-private String numero;
-private String nmCidade;
-private String nmEstado;
-private String parent1;
-private String parent2;
-private String nmDep1;
-private String nmDep2;
 
-
-
-public static void main(String[] args) {
-	FormCliente frmCli = new FormCliente();
-	
-	Scanner sc = new Scanner(System.in);		
-	
-	System.out.print("Digite o nome: ");		
-	frmCli.nome = sc.next();		
-	
-	System.out.print("Digite o cpf: ");		
-	frmCli.cpf = sc.next();
-	
-	System.out.print("Digite o crédito: ");		
-	frmCli.credito = sc.nextDouble();
-	
-	System.out.print("Digite o sexo: ");		
-	frmCli.sexo = sc.next().charAt(0);
-	
-	System.out.print("Digite o logradouro: ");		
-	frmCli.logradouro = sc.next();
-	
-	System.out.print("Digite o cep: ");		
-	frmCli.cep = sc.next();
-	
-	System.out.print("Digite o complemento: ");		
-	frmCli.complemento = sc.next();
-	
-	System.out.print("Digite o numero: ");		
-	frmCli.numero = sc.next();
-	
-	System.out.print("Digite o cidade: ");		
-	frmCli.nmCidade = sc.next();
-	
-	System.out.print("Digite o estado: ");		
-	frmCli.nmEstado = sc.next();
-	
-	System.out.print("Digite o partensco do primeiro dependente: ");		
-	frmCli.parent1 = sc.next();
-	
-	System.out.print("Digite o nome do primeiro dependnete: ");		
-	frmCli.nmDep1 = sc.next();
-	
-	System.out.print("Digite o partensco do segundo dependente: ");		
-	frmCli.parent2 = sc.next();
-	
-	System.out.print("Digite o nome do segundo dependnete: ");		
-	frmCli.nmDep2 = sc.next();
