@@ -1,12 +1,14 @@
 package model.domain;
-public class Cartao {
+
+public class Cartao extends EntidadeDominio {
 
 	private String numeroCartao;
 	private String nomeCartao;
 	private String bandeiraCartao;
 	private int codigoSegCartao;
 
-	public Cartao(String numeroCartao, String nomeCartao, String bandeiraCartao, int codigoSegCartao) {
+	public Cartao(int idCartao, String numeroCartao, String nomeCartao, String bandeiraCartao, int codigoSegCartao) {
+		super(idCartao);
 		this.numeroCartao = numeroCartao;
 		this.nomeCartao = nomeCartao;
 		this.bandeiraCartao = bandeiraCartao;

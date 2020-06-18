@@ -7,6 +7,11 @@ public class EntidadeDominio {
 	private int id;
 	private Date dtCadastro;
 	
+	
+	public EntidadeDominio(int id) {
+		this.id = id;
+	}
+	
 	public int getId() {
 		return id;
 	}

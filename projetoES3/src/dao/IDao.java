@@ -1,12 +1,16 @@
 package dao;
+
+import java.util.List;
+import model.domain.EntidadeDominio;
+
 public interface IDao {
 
-	public abstract boolean cadastrar();
+	public void salvar(EntidadeDominio entidade);
 
-	public abstract boolean alterar();
+	public void alterar(EntidadeDominio entidade);
 
-	public abstract void consultar();
-
-	public abstract boolean inativar();
-
+	public void inativar(EntidadeDominio entidade);
+	
+	public List<EntidadeDominio> consultar(EntidadeDominio entidade);
+	
 }

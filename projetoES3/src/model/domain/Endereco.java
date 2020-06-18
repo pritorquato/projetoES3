@@ -1,9 +1,7 @@
 package model.domain;
 
-
 public class Endereco extends EntidadeDominio{
 
-	//private int codEnd;
 	private String nomeEnd;
 	private String tipoEnd;
 	private String tipoLogr;
@@ -16,10 +14,10 @@ public class Endereco extends EntidadeDominio{
 	private String observacoesEnd;
 
 
-	public Endereco(String nomeEnd, String tipoEnd, String tipoLogr, 
+	public Endereco(int codEnd, String nomeEnd, String tipoEnd, String tipoLogr, 
 			String tipoResid, String logradouroEnd, int numeroEnd, String bairroEnd,
 			String cepEnd, Cidade cidadeEnd, String observacoesEnd) {
-		//this.codEnd = codEnd;
+		super(codEnd);
 		this.nomeEnd = nomeEnd;
 		this.tipoEnd = tipoEnd;
 		this.tipoLogr = tipoLogr;
@@ -32,15 +30,12 @@ public class Endereco extends EntidadeDominio{
 		this.observacoesEnd = observacoesEnd;
 	}
 
-
-//	public int getCodEnd() {
-//		return codEnd;
-//	}
-//
-//	public void setCodEnd(int codEnd) {
-//		this.codEnd = codEnd;
-//	}
-
+	
+	public boolean validarEndereco() {
+		System.out.println("ENDEREÇO OK!");
+		return true;
+	}
+	
 	public String getNomeEnd() {
 		return nomeEnd;
 	}
