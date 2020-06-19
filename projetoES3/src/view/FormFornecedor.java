@@ -10,7 +10,6 @@ import control.IFachada;
 import dao.FornecedorDao;
 import dao.IDao;
 import model.Log;
-import model.domain.BandeiraCartao;
 import model.domain.Cartao;
 import model.domain.Cidade;
 import model.domain.Fornecedor;
@@ -29,6 +28,7 @@ public class FormFornecedor{
 	private String cpfForn;
 	private String generoForn;
 	private String dataNascForn;
+	private int idEnd;
 	private String tipoEnderecoForn; //tipoEndereço: cobrança ou entrega
 	private String nomeEnderecoForn; //frase curta
 	private String tipoResidenciaForn; //tipoResidencia: casa, apto, galpão
@@ -41,6 +41,7 @@ public class FormFornecedor{
 	private String estadoForn;
 	private String paisForn;
 	private String observacoes;
+	private int idTel;
 	private String tipoTelefoneForn;
 	private String dddTelefoneForn;
 	private String telefoneForn;
@@ -53,6 +54,7 @@ public class FormFornecedor{
 	private double rankingForn;
 	private String senhaForn;
 	private String confirmacaoSenhaForn;
+	private int idCartao;
 	private String bandeiraCartao;
 	private String numeroCartao;
 	private String nomeCartao;
@@ -70,9 +72,6 @@ public class FormFornecedor{
 		
 		Scanner sc = new Scanner(System.in);		
 		
-		System.out.print("Digite o genero (alimentício, higiene, papelaria, construção etc): ");		
-		frmForn.generoForn = sc.next();
-		
 		System.out.print("Digite o nome do fornecedor: ");		
 		frmForn.nomeForn = sc.next();		
 		
@@ -81,6 +80,9 @@ public class FormFornecedor{
 				
 		System.out.print("Digite o data de nascimento (dd/mm/aaaa): ");		
 		frmForn.dataNascForn = sc.next();
+
+		System.out.print("Digite o gênero do fornecedor: ");		
+		frmForn.generoForn = sc.next();
 		
 		System.out.print("Digite o tipo de endereço (cobrança ou entrega): ");		
 		frmForn.tipoEnderecoForn = sc.next();
@@ -141,8 +143,6 @@ public class FormFornecedor{
 		
 		
 		
-
-
 		System.out.print("Digite o ranking do fornecedor: ");		
 		frmForn.rankingForn = sc.nextDouble();
 
@@ -179,37 +179,20 @@ public class FormFornecedor{
 			Estado estado = new Estado(estadoForn, pais);
 			Cidade cidade = new Cidade(cidadeForn, estado);
 			
-			Endereco endereco = new Endereco(nomeEnderecoForn, tipoEnderecoForn, tipoLogradouroForn, 
+			Endereco endereco = new Endereco(idEnd, nomeEnderecoForn, tipoEnderecoForn, tipoLogradouroForn, 
 					tipoResidenciaForn, logradouroForn, numeroEnderecoForn, bairro, cepForn, cidade, observacoes); 
 			
-			Cartao cartao = new Cartao(numeroCartao, nomeCartao, bandeiraCartao, codSegCartao);
+			Cartao cartao = new Cartao(idCartao, numeroCartao, nomeCartao, bandeiraCartao, codSegCartao);
 			
-			
-			Telefone telefone = new Telefone();
-			
-//			Produto produto = new Produto(codProdForn, produtoPadraoForn);
+			Telefone telefone = new Telefone(idTel, tipoTelefoneForn, dddTelefoneForn, telefoneForn);
 
+//			Produto produto = new Produto(codProdForn, produtoPadraoForn);
 					
-			Fornecedor fornecedor = new Fornecedor(nomeForn, cpfForn, generoForn, dataNascForn, endereco, telefone, 
+			Fornecedor fornecedor = new Fornecedor(codForn, nomeForn, cpfForn, generoForn, dataNascForn, endereco, telefone, 
 					emailForn, rankingForn, senhaForn, confirmacaoSenhaForn, cartao);			
 							
 			return fornecedor;
 		}
-		
-		
-		
-		
-		
-	
-	public void gerarLog() {
-
-	}
-
-	public void cadastrar(Fornecedor fornecedor) {
-
-	}
-
-
 
 }
 

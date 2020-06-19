@@ -1,10 +1,43 @@
-package model;
-public class Telefone {
+package model.domain;
 
-	private TipoTelefone tipoTelefone;
+public class Telefone extends EntidadeDominio{
 
-	private int dddTelefone;
-
+	private String tipoTelefone;
+	private String dddTelefone;
 	private String numeroTelefone;
+	
+	public Telefone(int idTel, String tipoTelefone, String dddTelefone, String numeroTelefone) {
+		super(idTel);
+		this.tipoTelefone = tipoTelefone;
+		this.dddTelefone = dddTelefone;
+		this.numeroTelefone = numeroTelefone;
+	}
+
+	public String getTipoTelefone() {
+		return tipoTelefone;
+	}
+
+	public void setTipoTelefone(String tipoTelefone) {
+		this.tipoTelefone = tipoTelefone;
+	}
+
+	public String getDddTelefone() {
+		return dddTelefone;
+	}
+
+	public void setDddTelefone(String dddTelefone) {
+		this.dddTelefone = dddTelefone;
+	}
+
+	public String getNumeroTelefone() {
+		return numeroTelefone;
+	}
+
+	public void setNumeroTelefone(String numeroTelefone) {
+		this.numeroTelefone = numeroTelefone;
+	}
+
+	
+	
 
 }

@@ -14,29 +14,35 @@ public class FachadaFornecedor implements IFachada{
 	@Override
 	public String salvar(EntidadeDominio entidade) {
 		Fornecedor fornecedor = (Fornecedor)entidade;
-		
+							
 		boolean isTrue = false;
 		
+		isTrue = fornecedor.validarDadosObrigatorios();
 		
 		if(isTrue) {
-			//MSG 2.2.6
-			cliente.complementarDtCadastro();
-			//MSG 2.2.7
-			IDao dao = new ClienteDAO();
+			isTrue = fornecedor.validarCpf();
+			if(isTrue) {
+				isTrue = fornecedor.validarExistencias();
+			}			
+		}			
+		
+		if(isTrue) {
+
+			fornecedor.complementarDtCadastro();
+
+			IDao dao = new FornecedorDao();
 			
-			dao.salvar(cliente);
-			//MSG 2.2.8
+			dao.salvar(fornecedor);
+
 			gerarLog();
-			return "Cliente salvo com sucesso!";
+			return "Fornecedor salvo com sucesso!";
 		}else {
 			return "Erro de validação!";
 		}	
-	}
-	
+	}//salvar
+
 	private void gerarLog() {
-		//MSG 2.2.8.1
 		Log log = new Log();	
-		//MSG 2.2.8.2
 		log.gerar(new HashMap<String, String>());
 	}
 
