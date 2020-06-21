@@ -19,10 +19,9 @@ public class Fornecedor extends EntidadeDominio {
 	private Cartao cartao;
 
 
-	public Fornecedor(int codForn, String nomeForn, String cpfForn, String generoForn, String dataNascForn, 
+	public Fornecedor(String nomeForn, String cpfForn, String generoForn, String dataNascForn, 
 			Endereco enderecoForn, Telefone telefoneForn, String emailForn, double rankingForn, String senhaForn, 
 			String confirmacaoSenhaForn, Cartao cartao) {
-		super(codForn);
 		this.nomeForn = nomeForn;
 		this.cpfForn = cpfForn;
 		this.generoForn = generoForn; 

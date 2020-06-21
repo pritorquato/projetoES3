@@ -3,6 +3,7 @@ package view;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 import control.FachadaFornecedor;
@@ -59,6 +60,7 @@ public class FormFornecedor{
 	private String numeroCartao;
 	private String nomeCartao;
 	private int codSegCartao;
+	private List<Telefone> telefones = new ArrayList<>();
 	
 
 	private JButton btAdicionarEndereco;
@@ -84,6 +86,7 @@ public class FormFornecedor{
 		System.out.print("Digite o gênero do fornecedor: ");		
 		frmForn.generoForn = sc.next();
 		
+//ENDEREÇO
 		System.out.print("Digite o tipo de endereço (cobrança ou entrega): ");		
 		frmForn.tipoEnderecoForn = sc.next();
 		
@@ -107,7 +110,8 @@ public class FormFornecedor{
 	
 		System.out.print("Digite o bairro: ");		
 		frmForn.bairro = sc.next();
-	
+
+//CIDADE, ESTADO, PAIS
 		System.out.print("Digite a cidade: ");		
 		frmForn.cidadeForn = sc.next();
 	
@@ -120,29 +124,43 @@ public class FormFornecedor{
 		System.out.print("Digite observações sobre o endereço (opcional): ");		
 		frmForn.observacoes = sc.next();
 	
-		System.out.print("Digite o tipo de telefone (residencial, celular, comercial etc): ");		
-		frmForn.tipoTelefoneForn = sc.next();
-	
-		System.out.print("Digite o ddd: ");		
-		frmForn.dddTelefoneForn = sc.next();
-	
-		System.out.print("Digite o telefone: ");		
-		frmForn.telefoneForn = sc.next();
+//TELEFONE
+//********************************************************************************//
+// PROBLEMA: preencher um array em tempo de execução, com informações de telefone,//
+//			produto e endereço sem quantidade especificada						  //
+//********************************************************************************//	
+//		
+//		List<Telefone> telefones = new ArrayList<Telefone>();
+//		while(  )  {
+//			Telefone telefone = new Telefone( frmForn.tipoTelefoneForn, frmForn.dddTelefoneForn, frmForn.telefoneForn);
+//			
+//			System.out.println("Informações sobre telefones, a qualquer momento digite  #  para sair.");
+//			System.out.print("Digite o tipo de telefone (residencial, celular, comercial etc): ");		
+//			frmForn.tipoTelefoneForn = sc.next();
+//			
+//			System.out.print("Digite o ddd: ");		
+//			frmForn.dddTelefoneForn = sc.next();
+//		
+//			System.out.print("Digite o telefone: ");		
+//			frmForn.telefoneForn = sc.next();
+//					
+//			telefones.add(telefone);		
+//						
+//		}
+//			
+
+		
+		 
 
 		System.out.print("Digite o email: ");		
 		frmForn.emailForn = sc.next();
 
-//		System.out.print("Digite os codigos dos produtos do fornecedor: ");		
-//		frmForn.codProdForn = sc.nextInt();
-//
+		System.out.print("Digite os codigos dos produtos do fornecedor: ");		
+		frmForn.codProdForn = sc.nextInt();
+
 //		System.out.print("Digite o produto padrão: ");		
 //		frmForn.produtoPadraoForn = sc.next();
-//		
-// PROBLEMA: preencher um array em tempo de execução, com informações de produto, 
-//		sem quantidade especificada
-		
-		
-		
+				
 		System.out.print("Digite o ranking do fornecedor: ");		
 		frmForn.rankingForn = sc.nextDouble();
 
@@ -163,7 +181,6 @@ public class FormFornecedor{
 		
 		System.out.print("Confirme sua senha: ");		
 		frmForn.confirmacaoSenhaForn = sc.next();
-
 		
 		Fornecedor fornecedor = frmForn.definirFornecedor();
 		
@@ -179,20 +196,22 @@ public class FormFornecedor{
 			Estado estado = new Estado(estadoForn, pais);
 			Cidade cidade = new Cidade(cidadeForn, estado);
 			
-			Endereco endereco = new Endereco(idEnd, nomeEnderecoForn, tipoEnderecoForn, tipoLogradouroForn, 
+			Endereco endereco = new Endereco(nomeEnderecoForn, tipoEnderecoForn, tipoLogradouroForn, 
 					tipoResidenciaForn, logradouroForn, numeroEnderecoForn, bairro, cepForn, cidade, observacoes); 
 			
-			Cartao cartao = new Cartao(idCartao, numeroCartao, nomeCartao, bandeiraCartao, codSegCartao);
+			Cartao cartao = new Cartao( numeroCartao, nomeCartao, bandeiraCartao, codSegCartao);
 			
-			Telefone telefone = new Telefone(idTel, tipoTelefoneForn, dddTelefoneForn, telefoneForn);
+			Telefone telefone = new Telefone(tipoTelefoneForn, dddTelefoneForn, telefoneForn);
 
 //			Produto produto = new Produto(codProdForn, produtoPadraoForn);
 					
-			Fornecedor fornecedor = new Fornecedor(codForn, nomeForn, cpfForn, generoForn, dataNascForn, endereco, telefone, 
+			Fornecedor fornecedor = new Fornecedor(nomeForn, cpfForn, generoForn, dataNascForn, endereco, telefone, 
 					emailForn, rankingForn, senhaForn, confirmacaoSenhaForn, cartao);			
 							
 			return fornecedor;
 		}
+
+
 
 }
 

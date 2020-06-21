@@ -6,8 +6,7 @@ public class Telefone extends EntidadeDominio{
 	private String dddTelefone;
 	private String numeroTelefone;
 	
-	public Telefone(int idTel, String tipoTelefone, String dddTelefone, String numeroTelefone) {
-		super(idTel);
+	public Telefone(String tipoTelefone, String dddTelefone, String numeroTelefone) {
 		this.tipoTelefone = tipoTelefone;
 		this.dddTelefone = dddTelefone;
 		this.numeroTelefone = numeroTelefone;

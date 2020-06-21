@@ -7,8 +7,8 @@ public class Cartao extends EntidadeDominio {
 	private String bandeiraCartao;
 	private int codigoSegCartao;
 
-	public Cartao(int idCartao, String numeroCartao, String nomeCartao, String bandeiraCartao, int codigoSegCartao) {
-		super(idCartao);
+	public Cartao(String numeroCartao, String nomeCartao, String bandeiraCartao, int codigoSegCartao) {
+
 		this.numeroCartao = numeroCartao;
 		this.nomeCartao = nomeCartao;
 		this.bandeiraCartao = bandeiraCartao;

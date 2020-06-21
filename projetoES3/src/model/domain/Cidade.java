@@ -1,6 +1,6 @@
 package model.domain;
 
-public class Cidade {
+public class Cidade extends EntidadeDominio {
 
 	private String descricao;
 	private Estado estado;

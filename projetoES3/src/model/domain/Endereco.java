@@ -14,10 +14,9 @@ public class Endereco extends EntidadeDominio{
 	private String observacoesEnd;
 
 
-	public Endereco(int codEnd, String nomeEnd, String tipoEnd, String tipoLogr, 
+	public Endereco(String nomeEnd, String tipoEnd, String tipoLogr, 
 			String tipoResid, String logradouroEnd, int numeroEnd, String bairroEnd,
 			String cepEnd, Cidade cidadeEnd, String observacoesEnd) {
-		super(codEnd);
 		this.nomeEnd = nomeEnd;
 		this.tipoEnd = tipoEnd;
 		this.tipoLogr = tipoLogr;

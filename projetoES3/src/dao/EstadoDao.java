@@ -8,32 +8,30 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.List;
 
-import model.domain.Endereco;
+import model.domain.Estado;
 import model.domain.EntidadeDominio;
 import util.Conexao;
 
-public class EnderecoDao implements IDao {
+public class EstadoDao implements IDao {
 	private Connection connection;
 	private boolean ctrlTransaction = true;
 	
-	public EnderecoDao(){}
+	public EstadoDao(){}
 	
-	public EnderecoDao(Connection connection){
+	public EstadoDao(Connection connection){
 		this.connection = connection;
 	}
 
 	@Override
 	public void salvar(EntidadeDominio entidade) {
-		Endereco endereco = (Endereco)entidade;
+		Estado estado = (Estado)entidade;
 		PreparedStatement pst = null;
 		StringBuilder sql = new StringBuilder();
 		
 		boolean ctrlTransaction = false;
 		
-		sql.append("INSERT INTO endereco(cidade_id,");
-		sql.append("nome_endereco, tipo_endereco, tipo_logradouro, tipo_residencia, ");
-		sql.append("logradouro_endereco, numero_endereco, bairro_endereco, cep_endereco, ");
-		sql.append("observacoes_endereco) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");	
+		sql.append("INSERT INTO estado(estado_descricao, sigla_estado, pais_id ) VALUES (?, ?, ?)");	
+		
 		
 		try {
 			if(connection == null){
@@ -43,37 +41,29 @@ public class EnderecoDao implements IDao {
 				ctrlTransaction = false;
 			}
 		
-			connection.setAutoCommit(false);		
-			
-			//vai salvar na outra tabela as informacoes de cidade
-			CidadeDao cidadeDao = new CidadeDao(connection);
-			cidadeDao.salvar(endereco.getCidadeEnd());
-			
+			connection.setAutoCommit(false);			
 					
+			
+			//vai salvar na outra tabela as informacoes de pais
+			PaisDao paisDao = new PaisDao(connection);
+			paisDao.salvar(estado.getPais());
+			
 			pst = connection.prepareStatement(sql.toString(), 
 					Statement.RETURN_GENERATED_KEYS);
 			
-			pst.setInt(1, endereco.getCidadeEnd().getId());
-//			pst.setString(2, endereco.getCidadeEnd().getEstado().getDescricao());
-			pst.setString(2, endereco.getNomeEnd());
-			pst.setString(3, endereco.getTipoEnd());
-			pst.setString(4, endereco.getTipoLogr());
-			pst.setString(5, endereco.getTipoResid());
-			pst.setString(6, endereco.getLogradouroEnd());
-			pst.setInt(7, endereco.getNumeroEnd());
-			pst.setString(8, endereco.getBairroEnd());		
-			pst.setString(9, endereco.getCepEnd());		
-			pst.setString(10, endereco.getObservacoesEnd());		
+			pst.setString(1, estado.getDescricao());
+			pst.setString(2, estado.getSigla());
+			pst.setInt(3, estado.getPais().getId());
+			
 			
 			pst.executeUpdate();		
 					
+			//traz id do pais para o estado
 			ResultSet rs = pst.getGeneratedKeys();
-			int idEnd = 0;
+			int idPais = 0;
 			if(rs.next())
-				idEnd = rs.getInt(1);
-			endereco.setId(idEnd);
-			
-			
+				idPais = rs.getInt(1);
+			estado.setId(idPais);
 			
 			if(!ctrlTransaction)
 				connection.commit();			

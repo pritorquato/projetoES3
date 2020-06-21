@@ -1,5 +1,5 @@
 package model.domain;
-public class Pais {
+public class Pais extends EntidadeDominio {
 
 	private String siglaPais;
 	private String descricaoPais;
