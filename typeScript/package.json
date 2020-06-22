@@ -1,0 +1,14 @@
+{
+  "name": "projetoesw3",
+  "version": "1.0.0",
+  "description": "projeto de cadastro para fornecedores",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dennis Alves e Pricila Torquado",
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.27.0"
+  }
+}
