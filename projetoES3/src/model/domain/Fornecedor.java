@@ -5,34 +5,34 @@ import java.util.List;
 public class Fornecedor extends EntidadeDominio {
 
 	private String nomeForn;
-	private Endereco enderecoForn;
 	private Produto produtosForn;
 	private Produto produtoPadraoForn;
 	private String generoForn;
 	private String dataNascForn;
 	private String cpfForn;
-	private Telefone telefoneForn;
 	private String emailForn;
 	private double rankingForn;
 	private String senhaForn;
 	private String confirmacaoSenhaForn;
 	private Cartao cartao;
+	private List<Telefone> telefones;
+	private List<Endereco> enderecos;
 
 
 	public Fornecedor(String nomeForn, String cpfForn, String generoForn, String dataNascForn, 
-			Endereco enderecoForn, Telefone telefoneForn, String emailForn, double rankingForn, String senhaForn, 
-			String confirmacaoSenhaForn, Cartao cartao) {
+			List<Endereco> enderecos, String emailForn, double rankingForn, String senhaForn, 
+			String confirmacaoSenhaForn, Cartao cartao, List<Telefone> telefones) {
 		this.nomeForn = nomeForn;
 		this.cpfForn = cpfForn;
 		this.generoForn = generoForn; 
 		this.dataNascForn = dataNascForn;
-		this.enderecoForn = enderecoForn;
-		this.telefoneForn = telefoneForn; 
 		this.emailForn = emailForn; 
 		this.rankingForn = rankingForn; 
 		this.senhaForn = senhaForn;
 		this.confirmacaoSenhaForn = confirmacaoSenhaForn;
 		this.cartao = cartao;
+		this.telefones = telefones;
+		this.enderecos = enderecos;
 	}
 
 	public boolean validarCpf() {
@@ -41,7 +41,7 @@ public class Fornecedor extends EntidadeDominio {
 	}
 	
 	public boolean validarDadosObrigatorios() {
-		if(enderecoForn.validarEndereco()) {
+		if(enderecos.validarEndereco()) {
 			System.out.println("DADOS OK!");
 			return true;
 		}
@@ -76,17 +76,6 @@ public class Fornecedor extends EntidadeDominio {
 	public void setNomeForn(String nomeForn) {
 		this.nomeForn = nomeForn;
 	}
-
-
-	public Endereco getEnderecoForn() {
-		return enderecoForn;
-	}
-
-
-	public void setEnderecoForn(Endereco enderecoForn) {
-		this.enderecoForn = enderecoForn;
-	}
-
 
 	public Produto getProdutosForn() {
 		return produtosForn;
@@ -137,17 +126,6 @@ public class Fornecedor extends EntidadeDominio {
 		this.cpfForn = cpfForn;
 	}
 
-
-	public Telefone getTelefoneForn() {
-		return telefoneForn;
-	}
-
-
-	public void setTelefoneForn(Telefone telefoneForn) {
-		this.telefoneForn = telefoneForn;
-	}
-
-
 	public String getEmailForn() {
 		return emailForn;
 	}
@@ -196,7 +174,22 @@ public class Fornecedor extends EntidadeDominio {
 	public void setCartao(Cartao cartao) {
 		this.cartao = cartao;
 	}
-	
+
+	public List<Telefone> getTelefones() {
+		return telefones;
+	}
+
+	public void setTelefones(List<Telefone> telefones) {
+		this.telefones = telefones;
+	}
+
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}	
 	
 	
 	

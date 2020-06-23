@@ -12,7 +12,7 @@ public class Endereco extends EntidadeDominio{
 	private String cepEnd;
 	private Cidade cidadeEnd;
 	private String observacoesEnd;
-
+	//private int fornecedorId;
 
 	public Endereco(String nomeEnd, String tipoEnd, String tipoLogr, 
 			String tipoResid, String logradouroEnd, int numeroEnd, String bairroEnd,
@@ -27,6 +27,7 @@ public class Endereco extends EntidadeDominio{
 		this.cepEnd = cepEnd;
 		this.cidadeEnd  = cidadeEnd;
 		this.observacoesEnd = observacoesEnd;
+//		this.fornecedorId = fornecedorId;
 	}
 
 	
@@ -114,6 +115,16 @@ public class Endereco extends EntidadeDominio{
 	public void setObservacoesEnd(String observacoesEnd) {
 		this.observacoesEnd = observacoesEnd;
 	}
+
+//
+//	public int getFornecedorId() {
+//		return fornecedorId;
+//	}
+//
+//
+//	public void setFornecedorId(int fornecedorId) {
+//		this.fornecedorId = fornecedorId;
+//	}
 
 	
 	

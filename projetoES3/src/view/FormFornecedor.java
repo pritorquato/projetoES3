@@ -24,12 +24,12 @@ import javax.swing.*;
 
 public class FormFornecedor{
 
-	private int codForn;
+//	private int codForn;
 	private String nomeForn;
 	private String cpfForn;
 	private String generoForn;
 	private String dataNascForn;
-	private int idEnd;
+	
 	private String tipoEnderecoForn; //tipoEndereço: cobrança ou entrega
 	private String nomeEnderecoForn; //frase curta
 	private String tipoResidenciaForn; //tipoResidencia: casa, apto, galpão
@@ -37,12 +37,17 @@ public class FormFornecedor{
 	private String logradouroForn;
 	private int numeroEnderecoForn;
 	private String cepForn;
+	
 	private String bairro;
 	private String cidadeForn;
 	private String estadoForn;
 	private String paisForn;
 	private String observacoes;
-	private int idTel;
+	
+	private List<Telefone> telefonesFornecedor = new ArrayList<Telefone>();
+
+	private List<Endereco> enderecosFornecedor = new ArrayList<Endereco>();
+	
 	private String tipoTelefoneForn;
 	private String dddTelefoneForn;
 	private String telefoneForn;
@@ -59,9 +64,7 @@ public class FormFornecedor{
 	private String bandeiraCartao;
 	private String numeroCartao;
 	private String nomeCartao;
-	private int codSegCartao;
-	private List<Telefone> telefones = new ArrayList<>();
-	
+	private int codSegCartao;	
 
 	private JButton btAdicionarEndereco;
 	private JButton btAdicionarCartao;
@@ -72,7 +75,8 @@ public class FormFornecedor{
 	public static void main(String[] args) {
 		FormFornecedor frmForn = new FormFornecedor();
 		
-		Scanner sc = new Scanner(System.in);		
+		Scanner sc = new Scanner(System.in);	
+		String resposta = "";
 		
 		System.out.print("Digite o nome do fornecedor: ");		
 		frmForn.nomeForn = sc.next();		
@@ -87,100 +91,160 @@ public class FormFornecedor{
 		frmForn.generoForn = sc.next();
 		
 //ENDEREÇO
-		System.out.print("Digite o tipo de endereço (cobrança ou entrega): ");		
-		frmForn.tipoEnderecoForn = sc.next();
 		
-		System.out.print("Digite o nome do endereço: ");		
-		frmForn.nomeEnderecoForn = sc.next();
+		while(!resposta.equalsIgnoreCase("n"))  {
+			Pais paisWhile = new Pais(frmForn.paisForn);
+			Estado estadoWhile = new Estado(frmForn.estadoForn, paisWhile);
+			Cidade cidadeWhile = new Cidade(frmForn.cidadeForn, estadoWhile);
+			Endereco enderecoWhile = new Endereco(frmForn.nomeEnderecoForn, frmForn.tipoEnderecoForn, frmForn.tipoLogradouroForn, 
+					frmForn.tipoResidenciaForn, frmForn.logradouroForn, frmForn.numeroEnderecoForn, frmForn.bairro, frmForn.cepForn, 
+					cidadeWhile, frmForn.observacoes);
+			
+//			Endereco endereco = new Endereco(nomeEnderecoForn, tipoEnderecoForn, tipoLogradouroForn, 
+//					tipoResidenciaForn, logradouroForn, numeroEnderecoForn, bairro, cepForn, cidade, observacoes); 
+			
+			System.out.print("Digite o tipo de endereço (cobrança ou entrega): ");		
+			enderecoWhile.setTipoEnd(sc.next());
+			
+			System.out.print("Digite o nome do endereço (uma frase curta para identificar o endereço): ");		
+			enderecoWhile.setNomeEnd(sc.next());
+			
+			System.out.print("Digite o tipo de residência (casa, apartamento etc): ");		
+			enderecoWhile.setTipoResid(sc.next());
+			
+			System.out.print("Digite o tipo de logradouro (rua, avenida, estrada etc): ");		
+			enderecoWhile.setTipoLogr(sc.next());
 		
-		System.out.print("Digite o tipo de residência (casa, apartamento etc): ");		
-		frmForn.tipoResidenciaForn = sc.next();
+			System.out.print("Digite o logradouro: ");		
+			enderecoWhile.setLogradouroEnd(sc.next());
+			
+			System.out.print("Digite o numero da residência: ");		
+			enderecoWhile.setNumeroEnd(sc.nextInt());
 		
-		System.out.print("Digite o tipo de logradouro (rua, avenida, estrada etc): ");		
-		frmForn.tipoLogradouroForn = sc.next();
-	
-		System.out.print("Digite o logradouro: ");		
-		frmForn.logradouroForn= sc.next();
+			System.out.print("Digite o CEP: ");		
+			enderecoWhile.setCepEnd(sc.next());
 		
-		System.out.print("Digite o numero da residência: ");		
-		frmForn.numeroEnderecoForn = sc.nextInt();
+			System.out.print("Digite o bairro: ");		
+			enderecoWhile.setBairroEnd(sc.next());
 	
-		System.out.print("Digite o CEP: ");		
-		frmForn.cepForn = sc.next();
-	
-		System.out.print("Digite o bairro: ");		
-		frmForn.bairro = sc.next();
-
-//CIDADE, ESTADO, PAIS
-		System.out.print("Digite a cidade: ");		
-		frmForn.cidadeForn = sc.next();
-	
-		System.out.print("Digite o estado: ");		
-		frmForn.estadoForn = sc.next();
-	
-		System.out.print("Digite o país: ");		
-		frmForn.paisForn = sc.next();
+	//CIDADE, ESTADO, PAIS
+			System.out.print("Digite a cidade: ");		
+			cidadeWhile.setDescricao(sc.next());
 		
-		System.out.print("Digite observações sobre o endereço (opcional): ");		
-		frmForn.observacoes = sc.next();
+			System.out.print("Digite o estado: ");		
+			estadoWhile.setDescricao(sc.next());
+		
+			System.out.print("Digite o país: ");		
+			paisWhile.setDescricao(sc.next());
+			
+			System.out.print("Digite observações sobre o endereço: ");		
+			enderecoWhile.setObservacoesEnd(sc.next());
+			
+					
+			frmForn.enderecosFornecedor.add(enderecoWhile);
+			
+			System.out.print("Deseja cadastrar outro ENDEREÇO? ('N' ou 'n' para não)");		
+			resposta = sc.next();
+		}
+		
+		
+		
+//		System.out.print("Digite o tipo de endereço (cobrança ou entrega): ");		
+//		frmForn.tipoEnderecoForn = sc.next();
+//		
+//		System.out.print("Digite o nome do endereço (uma frase curta para identificar o endereço): ");		
+//		frmForn.nomeEnderecoForn = sc.next();
+//		
+//		System.out.print("Digite o tipo de residência (casa, apartamento etc): ");		
+//		frmForn.tipoResidenciaForn = sc.next();
+//		
+//		System.out.print("Digite o tipo de logradouro (rua, avenida, estrada etc): ");		
+//		frmForn.tipoLogradouroForn = sc.next();
+//	
+//		System.out.print("Digite o logradouro: ");		
+//		frmForn.logradouroForn= sc.next();
+//		
+//		System.out.print("Digite o numero da residência: ");		
+//		frmForn.numeroEnderecoForn = sc.nextInt();
+//	
+//		System.out.print("Digite o CEP: ");		
+//		frmForn.cepForn = sc.next();
+//	
+//		System.out.print("Digite o bairro: ");		
+//		frmForn.bairro = sc.next();
+//
+////CIDADE, ESTADO, PAIS
+//		System.out.print("Digite a cidade: ");		
+//		frmForn.cidadeForn = sc.next();
+//	
+//		System.out.print("Digite o estado: ");		
+//		frmForn.estadoForn = sc.next();
+//	
+//		System.out.print("Digite o país: ");		
+//		frmForn.paisForn = sc.next();
+//		
+//		System.out.print("Digite observações sobre o endereço: ");		
+//		frmForn.observacoes = sc.next();
+		
+		
 	
 //TELEFONE
 //********************************************************************************//
 // PROBLEMA: preencher um array em tempo de execução, com informações de telefone,//
 //			produto e endereço sem quantidade especificada						  //
+//																				  //
+//								RESOLVIDO!!!									  //
 //********************************************************************************//	
-//		
-//		List<Telefone> telefones = new ArrayList<Telefone>();
-//		while(  )  {
-//			Telefone telefone = new Telefone( frmForn.tipoTelefoneForn, frmForn.dddTelefoneForn, frmForn.telefoneForn);
-//			
-//			System.out.println("Informações sobre telefones, a qualquer momento digite  #  para sair.");
-//			System.out.print("Digite o tipo de telefone (residencial, celular, comercial etc): ");		
-//			frmForn.tipoTelefoneForn = sc.next();
-//			
-//			System.out.print("Digite o ddd: ");		
-//			frmForn.dddTelefoneForn = sc.next();
-//		
-//			System.out.print("Digite o telefone: ");		
-//			frmForn.telefoneForn = sc.next();
-//					
-//			telefones.add(telefone);		
-//						
-//		}
-//			
-
 		
-		 
-
+		resposta = "";
+		
+		while(!resposta.equalsIgnoreCase("n"))  {
+			Telefone telefoneWhile = new Telefone(frmForn.tipoTelefoneForn, frmForn.dddTelefoneForn, frmForn.telefoneForn);
+			
+			System.out.print("Digite o tipo de telefone (residencial, celular, comercial etc): ");		
+			telefoneWhile.setTipoTelefone(sc.next());
+			
+			System.out.print("Digite o ddd: ");		
+			telefoneWhile.setDddTelefone(sc.next());
+		
+			System.out.print("Digite o telefone: ");		
+			telefoneWhile.setNumeroTelefone(sc.next());
+					
+			frmForn.telefonesFornecedor.add(telefoneWhile);
+			
+			System.out.print("Deseja cadastrar outro TELEFONE? ('N' ou 'n' para não ");		
+			resposta = sc.next();
+		}
+						
 		System.out.print("Digite o email: ");		
 		frmForn.emailForn = sc.next();
 
-		System.out.print("Digite os codigos dos produtos do fornecedor: ");		
-		frmForn.codProdForn = sc.nextInt();
-
+//		System.out.print("Digite os codigos dos produtos do fornecedor: ");		
+//		frmForn.codProdForn = sc.nextInt();
+//
 //		System.out.print("Digite o produto padrão: ");		
 //		frmForn.produtoPadraoForn = sc.next();
-				
-		System.out.print("Digite o ranking do fornecedor: ");		
-		frmForn.rankingForn = sc.nextDouble();
-
-		System.out.print("Digite a bandeira do cartão: ");		
-		frmForn.bandeiraCartao = sc.next();
-		
-		System.out.print("Digite o numero do cartão: ");		
-		frmForn.numeroCartao = sc.next();
-		
-		System.out.print("Digite o nome do titular do cartão: ");		
-		frmForn.nomeCartao = sc.next();
-		
-		System.out.print("Digite o código de segurança do cartão: ");		
-		frmForn.codSegCartao = sc.nextInt();
-
-		System.out.print("Digite o senha: ");		
-		frmForn.senhaForn = sc.next();
-		
-		System.out.print("Confirme sua senha: ");		
-		frmForn.confirmacaoSenhaForn = sc.next();
+//				
+//		System.out.print("Digite o ranking do fornecedor: ");		
+//		frmForn.rankingForn = sc.nextDouble();
+//
+//		System.out.print("Digite a bandeira do cartão: ");		
+//		frmForn.bandeiraCartao = sc.next();
+//		
+//		System.out.print("Digite o numero do cartão: ");		
+//		frmForn.numeroCartao = sc.next();
+//		
+//		System.out.print("Digite o nome do titular do cartão: ");		
+//		frmForn.nomeCartao = sc.next();
+//		
+//		System.out.print("Digite o código de segurança do cartão: ");		
+//		frmForn.codSegCartao = sc.nextInt();
+//
+//		System.out.print("Digite o senha: ");		
+//		frmForn.senhaForn = sc.next();
+//		
+//		System.out.print("Confirme sua senha: ");		
+//		frmForn.confirmacaoSenhaForn = sc.next();
 		
 		Fornecedor fornecedor = frmForn.definirFornecedor();
 		
@@ -192,21 +256,20 @@ public class FormFornecedor{
 	
 		private Fornecedor definirFornecedor() {
 		
-			Pais pais = new Pais(paisForn);
-			Estado estado = new Estado(estadoForn, pais);
-			Cidade cidade = new Cidade(cidadeForn, estado);
+//			Pais pais = new Pais(paisForn);
+//			Estado estado = new Estado(estadoForn, pais);
+//			Cidade cidade = new Cidade(cidadeForn, estado);
+//			
+//			Endereco endereco = new Endereco(nomeEnderecoForn, tipoEnderecoForn, tipoLogradouroForn, 
+//					tipoResidenciaForn, logradouroForn, numeroEnderecoForn, bairro, cepForn, cidade, observacoes); 
 			
-			Endereco endereco = new Endereco(nomeEnderecoForn, tipoEnderecoForn, tipoLogradouroForn, 
-					tipoResidenciaForn, logradouroForn, numeroEnderecoForn, bairro, cepForn, cidade, observacoes); 
-			
-			Cartao cartao = new Cartao( numeroCartao, nomeCartao, bandeiraCartao, codSegCartao);
-			
-			Telefone telefone = new Telefone(tipoTelefoneForn, dddTelefoneForn, telefoneForn);
+			Cartao cartao = new Cartao(numeroCartao, nomeCartao, bandeiraCartao, codSegCartao);
 
+//			
 //			Produto produto = new Produto(codProdForn, produtoPadraoForn);
 					
-			Fornecedor fornecedor = new Fornecedor(nomeForn, cpfForn, generoForn, dataNascForn, endereco, telefone, 
-					emailForn, rankingForn, senhaForn, confirmacaoSenhaForn, cartao);			
+			Fornecedor fornecedor = new Fornecedor(nomeForn, cpfForn, generoForn, dataNascForn, enderecosFornecedor, 
+					emailForn, rankingForn, senhaForn, confirmacaoSenhaForn, cartao, telefonesFornecedor );			
 							
 			return fornecedor;
 		}

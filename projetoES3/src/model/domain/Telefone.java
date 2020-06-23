@@ -10,6 +10,8 @@ public class Telefone extends EntidadeDominio{
 		this.tipoTelefone = tipoTelefone;
 		this.dddTelefone = dddTelefone;
 		this.numeroTelefone = numeroTelefone;
+		
+		
 	}
 
 	public String getTipoTelefone() {

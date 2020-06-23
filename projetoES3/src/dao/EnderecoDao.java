@@ -30,10 +30,11 @@ public class EnderecoDao implements IDao {
 		
 		boolean ctrlTransaction = false;
 		
-		sql.append("INSERT INTO endereco(cidade_id,");
+		sql.append("INSERT INTO endereco(cidade_id, ");
 		sql.append("nome_endereco, tipo_endereco, tipo_logradouro, tipo_residencia, ");
 		sql.append("logradouro_endereco, numero_endereco, bairro_endereco, cep_endereco, ");
-		sql.append("observacoes_endereco) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");	
+		sql.append("observacoes_endereco, fornecedor_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");	
+			
 		
 		try {
 			if(connection == null){
@@ -54,7 +55,6 @@ public class EnderecoDao implements IDao {
 					Statement.RETURN_GENERATED_KEYS);
 			
 			pst.setInt(1, endereco.getCidadeEnd().getId());
-//			pst.setString(2, endereco.getCidadeEnd().getEstado().getDescricao());
 			pst.setString(2, endereco.getNomeEnd());
 			pst.setString(3, endereco.getTipoEnd());
 			pst.setString(4, endereco.getTipoLogr());
@@ -64,6 +64,7 @@ public class EnderecoDao implements IDao {
 			pst.setString(8, endereco.getBairroEnd());		
 			pst.setString(9, endereco.getCepEnd());		
 			pst.setString(10, endereco.getObservacoesEnd());		
+//			pst.setInt(11, pegarIDfornecedor(endereco, idFrn));
 			
 			pst.executeUpdate();		
 					
@@ -72,9 +73,7 @@ public class EnderecoDao implements IDao {
 			if(rs.next())
 				idEnd = rs.getInt(1);
 			endereco.setId(idEnd);
-			
-			
-			
+		
 			if(!ctrlTransaction)
 				connection.commit();			
 			
@@ -97,7 +96,13 @@ public class EnderecoDao implements IDao {
 				}
 			}	
 		}
+
 	}
+	
+//	public int pegarIDfornecedor(Endereco end, int idFrn) {
+//		return idFrn;
+//	}
+	
 
 	@Override
 	public void alterar(EntidadeDominio entidade) {
@@ -114,5 +119,7 @@ public class EnderecoDao implements IDao {
 
 		return null;
 	}
+
+	
 
 }
