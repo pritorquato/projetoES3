@@ -1,11 +1,20 @@
 export class Cartao {
 
     constructor(
+
         private numeroCartao: string,
         private nomeCartao: string,
         private bandeiraCartao: string,
         private codigoSegCartao: number
     ) {}
+    private id: string = "";
+    public getId(): string {
+        return this.id;
+    }
+
+    public setId(id: string): void {
+        this.id = id;
+    }
 
     public getNumeroCartao(): string {
         return this.numeroCartao;

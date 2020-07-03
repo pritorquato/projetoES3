@@ -1,28 +1,29 @@
 import {EntidadeDominio} from "./EntidadeDominio";
 import {Produto} from "./Produto";
-import * as moment from "moment";
 import {Endereco} from "./Endereco";
 import {Telefone} from "./Telefone";
 import {Cartao} from "./Cartao";
 
 export class Fornecedor extends EntidadeDominio {
+    constructor(
+        private nomeForn: string,
+        private produtoPadraoForn: string,
+        private generoForn: string,
+        private senhaForn: string,
+        private dataNascForn: string,
+        private cpfForn: string,
+        private emailForn: string,
+        private rankingForn: string,
+        private cartaoForn: Cartao[],
+        private telefoneForn: Telefone[],
+        private enderecoForn: Endereco[],
+    ) {
+        super();
+    }
+    private status_ativo: boolean = true
 
-    private codForn: number;
-    private nomeForn: string;
-    private enderecoForn: Endereco[];
-    private produtosForn: Produto[];
-    private produtoPadraoForn: Produto;
-    private generoForn: string;
-    private senhaForn: string;
-    private confirmacaoSenhaForn: string;
-    private dataNascForn: moment.Moment;
-    private cpfForn: string;
-    private telefoneForn: Telefone;
-    private emailForn: string;
-    private rankingForn: number;
 
-
-    public Fornecedor(nomeForn: string, cpfForn: string, generoForn: string, dataNascForn: moment.Moment,
+    /*public Fornecedor(nomeForn: string, cpfForn: string, generoForn: string, dataNascForn: string,
                       endereco: Endereco, telefone: Telefone, emailForn: string, rankingForn: number, senhaForn: string,
                       confirmacaoSenhaForn: string, cartao: Cartao) {
 
@@ -38,7 +39,40 @@ export class Fornecedor extends EntidadeDominio {
         this.confirmacaoSenhaForn = confirmacaoSenhaForn;
         //Cartao cartao
 
+    }*/
+
+
+    getName() {
+        return this.nomeForn
     }
 
+    getCpf() {
+        return this.cpfForn
+    }
 
+    getData() {
+        return this.dataNascForn
+    }
+
+    getGenero() {
+        return this.generoForn
+    }
+
+    getProdutoPad() {
+        return this.produtoPadraoForn
+    }
+
+    getEmail() {
+        return this.emailForn
+    }
+
+    getRank() {
+        return this.rankingForn
+    }
+    getStatus(){
+        return this.status_ativo
+    }
+    setStatus(status:boolean):void{
+        this.status_ativo = status;
+    }
 }
