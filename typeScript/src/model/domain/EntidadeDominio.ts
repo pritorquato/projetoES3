@@ -1,23 +1,24 @@
-import * as moment from "moment";
+
 
 export class EntidadeDominio {
 
-    private id: number
-    private dtCadastro: moment.Moment
+        private id: string = ""
+        private dtCadastro: string =""
 
-    public getId(): number {
+
+    public getId(): string {
         return this.id;
     }
 
-    public setId(id: number): void {
+    public setId(id: string): void {
         this.id = id;
     }
 
-    public getDtCadastro(): moment.Moment {
+    public getDtCadastro(): string {
         return this.dtCadastro;
     }
 
-    public setDtCadastro(dtCadastro: moment.Moment): void {
+    public setDtCadastro(dtCadastro: string): void {
         this.dtCadastro = dtCadastro;
     }
 

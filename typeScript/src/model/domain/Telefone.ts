@@ -1,17 +1,17 @@
 import {TipoTelefone} from "./TipoTelefone";
 
 export class Telefone {
-    private _tipoTelefone: TipoTelefone;
-    private _dddTelefone: string;
-    private _numeroTelefone: string;
+    //private _tipoTelefone: TipoTelefone
+    private _dddTelefone: string=""
+    private _numeroTelefone: string=""
     
-    get tipoTelefone(): TipoTelefone {
+   /* get tipoTelefone(): TipoTelefone {
         return this._tipoTelefone;
     }
 
     set tipoTelefone(value: TipoTelefone) {
         this._tipoTelefone = value;
-    }
+    }*/
 
     get dddTelefone(): string {
         return this._dddTelefone;

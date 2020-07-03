@@ -2,7 +2,7 @@ import {EntidadeDominio} from "./EntidadeDominio";
 
 export class Produto extends EntidadeDominio {
 
-    private codProd: number;
+    private codProd: number = 0;
 //	private Endereco enderecoEntrega;
     private produtoPadrao: boolean = false;
 
