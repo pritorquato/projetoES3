@@ -54,7 +54,7 @@ export class Endereco extends EntidadeDominio {
         return this.tipoResid;
     }
 
-    public setTipoResid(tipoResid): void {
+    public setTipoResid(tipoResid:string): void {
         this.tipoResid = tipoResid;
     }
 

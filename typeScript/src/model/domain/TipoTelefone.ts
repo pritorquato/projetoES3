@@ -1,9 +1,9 @@
 export class TipoTelefone {
 
-    private tipoTelefone: string
+    private tipoTelefone: string =""
 
     public TipoTelefone(tipoTelefone: string): void {
-
+        this.tipoTelefone = tipoTelefone;
     }
 
 }

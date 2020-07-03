@@ -29,7 +29,7 @@ export class Estado {
         return this.descricaoEstado;
     }
 
-    public setDescricao(descricao): void {
+    public setDescricao(descricao:string): void {
         this.descricaoEstado = descricao;
     }
 
