@@ -1,0 +1,32 @@
+CREATE TABLE `fornecedor_endereco` (
+  `id_fornecedor_endereco` varchar(255) NOT NULL,
+  `fk_fornecedor_id_rel` int(11) DEFAULT NULL,
+  `fk_endereco_id_rel` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_fornecedor_endereco`),
+  KEY `fk_fornecedor_id_rel_idx` (`fk_fornecedor_id_rel`),
+  KEY `fk_endereco_id_rel_idx` (`fk_endereco_id_rel`),
+  CONSTRAINT `fk_endereco_id_rel` FOREIGN KEY (`fk_endereco_id_rel`) REFERENCES `endereco` (`id_endereco`),
+  CONSTRAINT `fk_fornecedor_id_rel` FOREIGN KEY (`fk_fornecedor_id_rel`) REFERENCES `fornecedor` (`codigo_fornecedor`)
+) 
+
+
+
+CREATE TABLE `produto_endereco` (
+  `id_produto_endereco` int(11) NOT NULL,
+  `fk_endereco_entrega_id` int(11) DEFAULT NULL,
+  `fk_produto_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_produto_endereco`),
+  KEY `fk_endereco_entrega_id_idx` (`fk_endereco_entrega_id`),
+  KEY `fk_produto_id` (`fk_produto_id`),
+  CONSTRAINT `fk_endereco_entrega_id` FOREIGN KEY (`fk_endereco_entrega_id`) REFERENCES `endereco` (`id_endereco`),
+  CONSTRAINT `fk_produto_id` FOREIGN KEY (`fk_produto_id`) REFERENCES `produto` (`id_produto`)
+) 
+
+
+exemplo:
+
+select fornecedor.nome_fornecedor, endereco.nome_endereco FROM fornecedor
+INNER JOIN endereco ON (endereco.id_endereco = (select x.fk_endereco_id_rel
+from fornecedor_endereco as x where x.fk_fornecedor_id_rel = fornecedor.codigo_fornecedor));
+
+
