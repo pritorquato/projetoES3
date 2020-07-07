@@ -1,7 +1,9 @@
 import {AbstractDao} from "./AbstractDao";
 
-export class PaisDao extends AbstractDao {
-    private static TABLE_NAME = "pais"
+
+
+export class CidadeDao extends AbstractDao {
+    private static TABLE_NAME = "cidade"
 
     public async salvar(): Promise<void> {
 
@@ -18,24 +20,24 @@ export class PaisDao extends AbstractDao {
     public async consultar(): Promise<any> {
 
     }
-    public async consultarTodosPaises(): Promise<any> {
+    public async consultarTodasCidade(): Promise<any> {
         try {
             const response = await super.setConnection()
                 .select("*")
-                .into(PaisDao.TABLE_NAME)
+                .into(CidadeDao.TABLE_NAME)
             if (response.length > 0) {
-                let PaisData = []
+                let cidadeData = []
                 for (let i = 0; i < response.length; i++) {
-                    const pais = {
-                        id: response[i].id_pais,
-                        descricao: response[i].pais_descricao,
-                        siglaPais: response[i].sigla_pais
+                    const cidade = {
+                        id: response[i].id_cidade,
+                        descricao: response[i].cidade_descricao,
+                        idEstado: response[i].estado_id
                     }
 
-                    PaisData.push(pais)
+                    cidadeData.push(cidade)
                 }
-                await AbstractDao.desconnectDB()
-                return PaisData
+
+                return cidadeData
             }
         } catch (err) {
             console.log(err)

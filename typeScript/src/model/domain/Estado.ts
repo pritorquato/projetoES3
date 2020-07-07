@@ -2,6 +2,7 @@ import {Pais} from "./Pais";
 
 export class Estado {
     constructor(
+        private id: number,
         private  siglaEstado: string,
         private  descricaoEstado: string,
         private  paisEstado: Pais
@@ -12,9 +13,16 @@ export class Estado {
         this.descricaoEstado = descricao;
     }*/
 
-    public Estado(descricao: string, pais: Pais): void {
+    public estado(descricao: string, pais: Pais): void {
         this.descricaoEstado = descricao;
         this.paisEstado = pais;
+    }
+    public getId(): number {
+        return this.id;
+    }
+
+    public setId(sigla: number): void {
+        this.id = sigla;
     }
 
     public getSigla(): string {

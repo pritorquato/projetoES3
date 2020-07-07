@@ -1,16 +1,16 @@
 export class Pais {
     constructor(
+        private id: number,
         private siglaPais: string,
         private descricaoPais: string
     ) {
     }
-    private id: string=""
 
-    public getId(): string {
+    public getId(): number {
         return this.id;
     }
 
-    public setId(id: string): void {
+    public setId(id: number): void {
         this.id = id;
     }
 

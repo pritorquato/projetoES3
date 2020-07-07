@@ -1,7 +1,10 @@
 import dotenv from "dotenv";
 import express from "express";
 import { AddressInfo } from "net";
-import {fornecedorRouter} from "./Router/FornecedorRouts";
+import {fornecedorRouter} from "./Router/FornecedorRouter";
+import {consultasRouter} from "./Router/ConsultasRouter";
+import {productsRouter} from "./Router/ProductsRouter";
+import {enderecoRouter} from "./Router/EnderecoRouter";
 
 
 
@@ -13,6 +16,9 @@ app.use(express.json());
 async function main():Promise<void>{
 
   app.use("/user", fornecedorRouter);
+  app.use("/consultas", consultasRouter);
+  app.use("/produtos",productsRouter);
+  app.use("/endereco",enderecoRouter);
 
 }
 main()
