@@ -1,21 +1,24 @@
-export class Cartao {
+import {EntidadeDominio} from "./EntidadeDominio";
+import {Fornecedor} from "./Fornecedor";
+
+export class Cartao extends EntidadeDominio{
 
     constructor(
-
         private numeroCartao: string,
         private nomeCartao: string,
         private bandeiraCartao: string,
-        private codigoSegCartao: number
-    ) {}
-    private id: string = "";
-    public getId(): string {
-        return this.id;
+        private codigoSegCartao: number,
+        private fornecedorId: string
+    ) {super();}
+
+
+    public getfornecedorId(): string {
+        return this.fornecedorId;
     }
 
-    public setId(id: string): void {
-        this.id = id;
+    public setfornecedorId(fornecedorId: string): void {
+        this.fornecedorId = fornecedorId;
     }
-
     public getNumeroCartao(): string {
         return this.numeroCartao;
     }

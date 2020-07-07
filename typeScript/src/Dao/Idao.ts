@@ -8,6 +8,6 @@ export interface IDao {
 
       inativar(entidade: EntidadeDominio): void
 
-      consultar(entidade: EntidadeDominio): any
+      consultar(entidade: EntidadeDominio|undefined): any
 
 }

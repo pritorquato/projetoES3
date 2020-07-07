@@ -1,5 +1,4 @@
 import {EntidadeDominio} from "./EntidadeDominio";
-import {Produto} from "./Produto";
 import {Endereco} from "./Endereco";
 import {Telefone} from "./Telefone";
 import {Cartao} from "./Cartao";
@@ -17,9 +16,11 @@ export class Fornecedor extends EntidadeDominio {
         private cartaoForn: Cartao[],
         private telefoneForn: Telefone[],
         private enderecoForn: Endereco[],
+        private produtosForn: string[],
     ) {
         super();
     }
+
     private status_ativo: boolean = true
 
 
@@ -41,6 +42,31 @@ export class Fornecedor extends EntidadeDominio {
 
     }*/
 
+    getProdutos() {
+        return this.produtosForn;
+    }
+    addProduto(produto: string){
+        this.produtosForn.push(produto);
+    }
+
+    getCartoes() {
+        return this.cartaoForn;
+    }
+    addCartao(cartao: Cartao){
+        this.cartaoForn.push(cartao);
+    }
+    getTelefones() {
+        return this.telefoneForn;
+    }
+    addTelefones(telefones: Telefone){
+        this.telefoneForn.push(telefones);
+    }
+    getEnderecos() {
+        return this.enderecoForn;
+    }
+    addEnderecos(endereco: Endereco) {
+        this.enderecoForn.push(endereco);
+    }
 
     getName() {
         return this.nomeForn
@@ -52,6 +78,9 @@ export class Fornecedor extends EntidadeDominio {
 
     getData() {
         return this.dataNascForn
+    }
+    getSenha(){
+        return this.senhaForn
     }
 
     getGenero() {

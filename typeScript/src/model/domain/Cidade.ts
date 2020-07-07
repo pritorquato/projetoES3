@@ -2,9 +2,18 @@ import {Estado} from "./Estado";
 
 export class Cidade {
     constructor(
+        private id: number,
         private descricao: string,
         private estado: Estado
     ) {
+    }
+
+    public getId(): number {
+        return this.id;
+    }
+
+    public setId(id: number): void {
+        this.id = id;
     }
 
     public getDescricao(): string {
