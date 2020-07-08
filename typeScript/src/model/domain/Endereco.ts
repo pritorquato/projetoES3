@@ -1,9 +1,9 @@
 import {EntidadeDominio} from "./EntidadeDominio";
 import {Cidade} from "./Cidade";
+import {Fornecedor} from "./Fornecedor";
 
 export class Endereco extends EntidadeDominio {
     constructor(
-        //private  codEnd:int,
         private nomeEnd: string,
         private  tipoEnd: string,
         private  tipoLogr: string,
@@ -12,19 +12,11 @@ export class Endereco extends EntidadeDominio {
         private  numeroEnd: number,
         private  bairroEnd: string,
         private  cepEnd: string,
-        private  cidadeEnd: Cidade,
+        private  cidadeEnd: number,
         private observacoesEnd: string,
     ) {
         super();
     }
-
-    //	public int getCodEnd() {
-//		return codEnd;
-//	}
-//
-//	public void setCodEnd(int codEnd) {
-//		this.codEnd = codEnd;
-//	}
 
     public getNomeEnd(): string {
         return this.nomeEnd;
@@ -54,7 +46,7 @@ export class Endereco extends EntidadeDominio {
         return this.tipoResid;
     }
 
-    public setTipoResid(tipoResid:string): void {
+    public setTipoResid(tipoResid: string): void {
         this.tipoResid = tipoResid;
     }
 
@@ -90,11 +82,11 @@ export class Endereco extends EntidadeDominio {
         this.cepEnd = cepEnd;
     }
 
-    public getCidadeEnd(): Cidade {
+    public getCidadeEnd(): number {
         return this.cidadeEnd;
     }
 
-    public setCidadeEnd(cidadeEnd: Cidade): void {
+    public setCidadeEnd(cidadeEnd: number): void {
         this.cidadeEnd = cidadeEnd;
     }
 

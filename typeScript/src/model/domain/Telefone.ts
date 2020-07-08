@@ -1,34 +1,47 @@
-import {TipoTelefone} from "./TipoTelefone";
+import {EntidadeDominio} from "./EntidadeDominio";
+import {Fornecedor} from "./Fornecedor";
 
-export class Telefone {
-    //private _tipoTelefone: TipoTelefone
-    private _dddTelefone: string=""
-    private _numeroTelefone: string=""
-    
-   /* get tipoTelefone(): TipoTelefone {
-        return this._tipoTelefone;
+export class Telefone extends EntidadeDominio {
+    constructor(
+        private tipoTelefone: string,
+        private dddTelefone: string,
+        private numeroTelefone: string,
+        private fornecedorId: string
+    ) {
+        super();
     }
 
-    set tipoTelefone(value: TipoTelefone) {
-        this._tipoTelefone = value;
-    }*/
-
-    get dddTelefone(): string {
-        return this._dddTelefone;
+    public setFornecedorId(id: string) {
+        this.fornecedorId = id
     }
 
-    set dddTelefone(value: string) {
-        this._dddTelefone = value;
+    public getFornecedorId() {
+        return this.fornecedorId
     }
 
-    get numeroTelefone(): string {
-        return this._numeroTelefone;
+    getTipoTelefone(): string {
+        return this.tipoTelefone;
     }
 
-    set numeroTelefone(value: string) {
-        this._numeroTelefone = value;
+    setTipoTelefone(value: string) {
+        this.tipoTelefone = value;
     }
 
+    getDddTelefone(): string {
+        return this.dddTelefone;
+    }
+
+    setDddTelefone(value: string) {
+        this.dddTelefone = value;
+    }
+
+    getNumeroTelefone(): string {
+        return this.numeroTelefone;
+    }
+
+    setNumeroTelefone(value: string) {
+        this.numeroTelefone = value;
+    }
 
 
 }

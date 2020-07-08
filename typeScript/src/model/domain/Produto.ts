@@ -2,36 +2,15 @@ import {EntidadeDominio} from "./EntidadeDominio";
 
 export class Produto extends EntidadeDominio {
 
-    private codProd: number = 0;
-//	private Endereco enderecoEntrega;
-    private produtoPadrao: boolean = false;
-
-
-    public Produto(codProd: number, produtoPadrao: boolean) {
-        this.codProd = codProd;
-        this.produtoPadrao = produtoPadrao;
+    constructor(
+        private descricao: string,
+    ) {
+        super();
     }
-
-    public getCodProd(): number {
-        return this.codProd;
+    public getDescricao(): string {
+       return this.descricao
     }
-
-    public setCodProd(codProd: number): void {
-        this.codProd = codProd;
+    public setDescricao(descricao: string) {
+         this.descricao = descricao;
     }
-
-//	public Endereco getEnderecoEntrega() {
-//		return enderecoEntrega;
-//	}
-//	public void setEnderecoEntrega(Endereco enderecoEntrega) {
-//		this.enderecoEntrega = enderecoEntrega;
-//	}
-    public isProdutoPadrao(): boolean {
-        return this.produtoPadrao;
-    }
-
-    public setProdutoPadrao(produtoPadrao: boolean): void {
-        this.produtoPadrao = produtoPadrao;
-    }
-
 }
