@@ -89,65 +89,49 @@ public class ValidarEnderecos implements IStrategy {
 		
 		if(endereco.getNomeEnd() == null || 
 				endereco.getNomeEnd().trim().equals("") || endereco.getNomeEnd().contains(" ")) {
-			return false;
-			//sb.append("É obrigatório informar um nome formado de frase curta para o endereço\n");			
+			return false;	
 		}		
 		
 		if(endereco.getTipoEnd() == null || 
 				endereco.getTipoEnd().trim().equals("")) {
-			return false;
-			//sb.append("É obrigatório pelo menos um endereço de cobrança e pelo menos um endereço de entrega para o fornecedor\n");			
+			return false;			
 		}
 	
 		if(endereco.getTipoResid() == null || 
 				endereco.getTipoResid().trim().equals("")) {
 			return false;
-			//sb.append("É obrigatório informar o tipo de residência (casa, apto, conjunto, galpão, sala etc.\n");			
 		}		
 	
 		if(endereco.getLogradouroEnd() == null || 
 				endereco.getLogradouroEnd().trim().equals("")) {
 			return false;
-			//sb.append("Logradouro é um campo obrigatório\n");			
 		}
 		
 		if(endereco.getCepEnd() == null || 
 				endereco.getCepEnd().trim().equals("")) {
-			return false;
-			//sb.append("CEP é um campo obrigatório\n");			
+			return false;	
 		}
 		
 		if(endereco.getNumeroEnd() == null || 
 				endereco.getNumeroEnd().trim().equals("")) {
 			return false;
-			//sb.append("Número é um campo obrigatório\n");			
 		}
 		
 		if(endereco.getCidadeEnd().getDescricao() == null || 
 				endereco.getCidadeEnd().getDescricao().trim().equals("")) {
-			return false;
-			//sb.append("Cidade é um campo obrigatório\n");			
+			return false;	
 		}
 		
 		if(endereco.getCidadeEnd().getEstado().getDescricao() == null || 
 				endereco.getCidadeEnd().getEstado().getDescricao().trim().equals("")) {
 			return false;
-			//sb.append("Estado é um campo obrigatório\n");			
 		}
 		
 		if(endereco.getCidadeEnd().getEstado().getPais().getDescricao() == null || 
 				endereco.getCidadeEnd().getEstado().getPais().getDescricao().trim().equals("")) {
-			return false;
-			//sb.append("País é um campo obrigatório\n");			
+			return false;		
 		}
-		
-		
 
-		//if(sb.length()==0)
-		//	return null;
-		//else
-		//	return sb.toString();
-		
 		return true;
 	}
 }
@@ -221,6 +205,7 @@ public class ValidarProdPadrao implements IStrategy {
 		return null;
 	}
 }
+		
 		
 		
 //SENHA
@@ -354,14 +339,29 @@ public class ValidarDadosFornecedor implements IStrategy {
 		}
 		
 		ValidarProdPadrao vProdPad = new ValidarProdPadrao();
-		
 		ValidarEndereco vEndereco = new ValidarEndereco();
-		
-		String validacaoEnd = vEndereco.processar(fornecedor.getEndereco());
+		ValidarCartao vCartao = new ValidarCartao();
+		ValidarTelefone vTelefone = new ValidarTelefone();
+
+		String validacaoProd = vProdPad.processar(fornecedor.getProdutoPad());
+		String validacaoEnd = vEndereco.processar(fornecedor.getEnderecos());
+		String validacaoCartao = vCartao.processar(fornecedor.getCartoes());
+		String validacaoTel = vTelefone.processar(fornecedor.getTelefones());
+
 		
 		if(validacaoEnd != null) {
 			sb.append(validacaoEnd);
-		}				
+		}		
+		if(validacaoProd != null) {
+			sb.append(validacaoProd);
+		}		
+		if(validacaoCartao != null) {
+			sb.append(validacaoCartao);
+		}
+		if(validacaoTel != null) {
+			sb.append(validacaoTel);
+		}		
+					
 			
 		if(sb.length()==0)
 			return null;
@@ -371,3 +371,58 @@ public class ValidarDadosFornecedor implements IStrategy {
 }
 
 
+//TELEFONES
+
+package negocio;
+
+import model.domain.Telefone;
+import model.domain.EntidadeDominio;
+
+public class ValidarTelefone implements IStrategy {
+
+	@Override
+	public String processar(EntidadeDominio entidade) {
+		Fornecedor fornecedor = (Fornecedor)entidade;
+
+		StringBuilder sb = new StringBuilder();
+
+		if(fornecedor.getTelefones().size == 0 || 
+				fornecedor.getTelefones().isEmpty() {
+			return "É obrigatório pelo menos um telefone para o fornecedor\n";			
+		}
+		return null;		
+		
+		for (Telefone t : fornecedor.getTelefones()) {
+			if (!validarUmTelefone(t)) {
+				sb.append("O telefone ");
+				sb.append(t.getNumeroTelefone());
+				sb.append(" é inválido!");
+			}
+		}
+		
+		if (sb.length() > 0) {
+			return sb.toString();
+		} else {
+			return null;
+		}
+	}
+		
+	private boolean validarUmTelefone(Telefone telefone) {
+	
+		if(telefone.getTipoTelefone() == null || 
+				telefone.getNomeEnd().trim().equals("") {
+			return false;	
+		}
+		
+		if(telefone.getDddTelefone() == null || 
+				telefone.getDddTelefone().trim().equals("") {
+			return false;	
+		}	
+		
+		if(telefone.getNumeroTelefone() == null || 
+				telefone.getNumeroTelefone().trim().equals("") {
+			return false;	
+		}				
+		return true;		
+	}
+}
