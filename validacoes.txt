@@ -1,0 +1,373 @@
+//CLASSE ENUM TIPO ENDEREÇO:
+
+public enum TipoEnd{
+    C(0,"Cobrança"), E(1,"Entrega"), R(2,"Residencial"), O(3,"Outros");
+
+    private int indice;
+    private String descricao;
+
+    Turno(int indice, String descricao) {
+        this.indice = indice;
+        this.descricao = descricao;
+    }
+
+    public int getIndice() {
+        return indice;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+}
+
+//CLASSE ENUM TIPOBandeira:
+
+public enum TipoBandeira {
+
+    M(0,"Mastercard"), V(1,"Visa"), E(2,"Elo"), O(3,"Outros");
+
+    private int indice;
+    private String descricao;
+
+    TipoBandeira(int indice, String descricao) {
+        this.indice = indice;
+        this.descricao = descricao;
+    }
+
+    public int getIndice() {
+        return indice;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+}
+
+
+
+//VALIDAÇÕES
+//CADA CLASSE É UM ARQUIVO NO PACOTE NEGOCIO
+
+
+// ENDERECOS COMPLETOS
+
+package negocio;
+
+import model.domain.Fornecedor;
+import model.domain.EntidadeDominio;
+
+public class ValidarEnderecos implements IStrategy {
+
+	@Override
+	public String processar(EntidadeDominio entidade) {
+		Fornecedor fornecedor = (Fornecedor)entidade;
+		
+		StringBuilder sb = new StringBuilder();
+		
+		if (fornecedor.getEnderecos().size() >= 2) {
+			for (Endereco e : fornecedor.getEnderecos()) {
+				if (!validarUmEndereco(e)) {
+					sb.append("O endereço de nome ");
+					sb.append(e.getNomeEnd());
+					sb.append(" é inválido!");
+				}
+			}
+		} else {
+			return "São necessários no mínimo 2 endereços: um de cobrança e um de entrega!\n";
+		}
+
+		if (sb.length() > 0) {
+			return sb.toString();
+		} else {
+			return null;
+		}
+	}		
+		
+	private boolean validarUmEndereco(Endereco endereco) {
+
+		//StringBuilder sb = new StringBuilder();
+		
+		if(endereco.getNomeEnd() == null || 
+				endereco.getNomeEnd().trim().equals("") || endereco.getNomeEnd().contains(" ")) {
+			return false;
+			//sb.append("É obrigatório informar um nome formado de frase curta para o endereço\n");			
+		}		
+		
+		if(endereco.getTipoEnd() == null || 
+				endereco.getTipoEnd().trim().equals("")) {
+			return false;
+			//sb.append("É obrigatório pelo menos um endereço de cobrança e pelo menos um endereço de entrega para o fornecedor\n");			
+		}
+	
+		if(endereco.getTipoResid() == null || 
+				endereco.getTipoResid().trim().equals("")) {
+			return false;
+			//sb.append("É obrigatório informar o tipo de residência (casa, apto, conjunto, galpão, sala etc.\n");			
+		}		
+	
+		if(endereco.getLogradouroEnd() == null || 
+				endereco.getLogradouroEnd().trim().equals("")) {
+			return false;
+			//sb.append("Logradouro é um campo obrigatório\n");			
+		}
+		
+		if(endereco.getCepEnd() == null || 
+				endereco.getCepEnd().trim().equals("")) {
+			return false;
+			//sb.append("CEP é um campo obrigatório\n");			
+		}
+		
+		if(endereco.getNumeroEnd() == null || 
+				endereco.getNumeroEnd().trim().equals("")) {
+			return false;
+			//sb.append("Número é um campo obrigatório\n");			
+		}
+		
+		if(endereco.getCidadeEnd().getDescricao() == null || 
+				endereco.getCidadeEnd().getDescricao().trim().equals("")) {
+			return false;
+			//sb.append("Cidade é um campo obrigatório\n");			
+		}
+		
+		if(endereco.getCidadeEnd().getEstado().getDescricao() == null || 
+				endereco.getCidadeEnd().getEstado().getDescricao().trim().equals("")) {
+			return false;
+			//sb.append("Estado é um campo obrigatório\n");			
+		}
+		
+		if(endereco.getCidadeEnd().getEstado().getPais().getDescricao() == null || 
+				endereco.getCidadeEnd().getEstado().getPais().getDescricao().trim().equals("")) {
+			return false;
+			//sb.append("País é um campo obrigatório\n");			
+		}
+		
+		
+
+		//if(sb.length()==0)
+		//	return null;
+		//else
+		//	return sb.toString();
+		
+		return true;
+	}
+}
+
+
+
+//ENDEREÇO COBRANÇA
+
+package negocio;
+
+import model.domain.Endereco;
+import model.domain.EntidadeDominio;
+
+public class ValidarEndCobranca implements IStrategy {
+
+
+	@Override
+	public String processar(EntidadeDominio entidade) {
+		Endereco endereco = (Endereco)entidade;
+
+		if(endereco.getTipoEnd() == null || 
+				endereco.getTipoEnd().trim().equalsIgnoreCase("C") {
+			return "É obrigatório pelo menos um endereço de cobrança para o fornecedor\n";			
+		}
+		return null;
+	}
+}
+		
+		
+//ENDEREÇO ENTREGA
+
+package negocio;
+
+import model.domain.Endereco;
+import model.domain.EntidadeDominio;
+
+public class ValidarEndEntrega implements IStrategy {
+
+
+	@Override
+	public String processar(EntidadeDominio entidade) {
+		Endereco endereco = (Endereco)entidade;
+
+		if(endereco.getTipoEnd() == null || 
+				endereco.getTipoEnd().trim().equalsIgnoreCase("E") {
+			return "É obrigatório pelo menos um endereço de entrega!\n";			
+		}
+		return null;
+	}
+}
+		
+				
+//PRODUTO PADRAO
+
+package negocio;
+
+import model.domain.Fornecedor;
+import model.domain.EntidadeDominio;
+
+public class ValidarProdPadrao implements IStrategy {
+
+
+	@Override
+	public String processar(EntidadeDominio entidade) {
+		Fornecedor fornecedor = (Fornecedor)entidade;
+
+		if(fornecedor.getProdutoPad() == null || 
+				fornecedor.getProdutoPad().trim().equals("") {
+			return "É obrigatório um produto padrão para o fornecedor\n";			
+		}
+		return null;
+	}
+}
+		
+		
+//SENHA
+
+package negocio;
+
+import model.domain.EntidadeDominio;
+import model.domain.Fornecedor;
+
+public class ValidarSenha implements IStrategy {
+
+	@Override
+	public String processar(EntidadeDominio entidade) {
+		Senha senha = (Senha)entidade;
+
+		if (senha.getSenha().length() < 8) { 
+			return false;
+		}
+
+		boolean okNumero = false;
+		boolean okMaiuscula = false;
+		boolean okMinuscula = false;
+		boolean okSimbolo = false;
+		for (char c : senha.toCharArray()) {
+			 if (c >= '0' && c <= '9') {
+				 okNumero = true;
+			 } else if (c >= 'A' && c <= 'Z') {
+				 okMaiuscula = true;
+			 } else if (c >= 'a' && c <= 'z') {
+				 okMinuscula = true;
+			 } else {
+				 okSimbolo = true;
+			 }
+		}
+		return okNumero && okMaiuscula && okMinuscula && okSimbolo;
+	}
+}
+
+
+
+// CARTAO DE CREDITO
+
+package negocio;
+
+import model.domain.TipoBandeira;
+import model.domain.Fornecedor;
+import model.domain.EntidadeDominio;
+
+public class ValidarCartao implements IStrategy {
+
+	@Override
+	public String processar(EntidadeDominio entidade) {
+		Fornecedor fornecedor = (Fornecedor)entidade;
+		
+		StringBuilder sb = new StringBuilder();
+		
+		if(fornecedor.getCartao().getNumeroCartao() == null || 
+				fornecedor.getCartao().getNumeroCartao().trim().equals("")) {
+			sb.append("Numero do cartão é um campo obrigatório\n");
+		}
+	
+		if(fornecedor.getCartao().getNomeCartao() == null || 
+				fornecedor.getCartao().getNomeCartao().trim().equals("")) {
+			sb.append("Nome do titular do cartão é um campo obrigatório\n");
+		}		
+	
+		if(fornecedor.getCartao().getBandeiraCartao() == null || 
+				fornecedor.getCartao().getBandeiraCartao().trim().equals("")) {
+			sb.append("É obrigatorio cadastrar um cartao)\n");	
+						
+		}
+	
+		boolean achouBandeira=false;
+		for (TipoBandeira tpBand : TipoBandeira.values()) {  
+			if (fornecedor.getCartao().getBandeiraCartao() == tpBand.name) {  
+				achouBandeira = true;
+			}  
+		}
+		if (achouBandeira == false){
+			return "A bandeira do cartao não consta no sistema\n";	
+		}
+		
+		if(fornecedor.getCartao().getCodigoSegCartao() == 0) {
+			sb.append("É obrigatório cadastrar o código de segurança)\n");
+		}
+		
+		if(sb.length()==0)
+			return null;
+		else
+			return sb.toString();
+	}		
+}
+
+
+//DADOS OBRIGATORIOS DE Fornecedor
+
+package negocio;
+
+import model.domain.Cliente;
+import model.domain.EntidadeDominio;
+
+public class ValidarDadosFornecedor implements IStrategy {
+
+	@Override
+	public String processar(EntidadeDominio entidade) {
+		Fornecedor fornecedor = (Fornecedor)entidade;
+		StringBuilder sb = new StringBuilder();
+		
+		if(fornecedor.getName() == null || fornecedor.getName().trim().equals("")) {
+			sb.append("Nome é um campo obrigatório\n");
+		}
+		
+		if(fornecedor.getCpf() == null || fornecedor.getCpf().trim().equals("")) {
+			sb.append("CPF é um campo obrigatório\n");			
+		}
+		
+		if(fornecedor.getData() == null || fornecedor.getData().trim().equals("")) {
+			sb.append("Data de nascimento é um campo obrigatório\n");			
+		}
+			
+		if(fornecedor.getGenero() == null || fornecedor.getGenero().trim().equals("")) {
+			sb.append("Genero é um campo obrigatório\n");			
+		}
+			
+		if(fornecedor.getEmail() == null || fornecedor.getEmail().trim().equals("")) {
+			sb.append("E-mail é um campo obrigatório\n");			
+		}
+		
+		if(fornecedor.getRank() == null || fornecedor.getRank().trim().equals("")) {
+			sb.append("O fornecedor deve receber um ranking numérico\n");			
+		}
+		
+		ValidarProdPadrao vProdPad = new ValidarProdPadrao();
+		
+		ValidarEndereco vEndereco = new ValidarEndereco();
+		
+		String validacaoEnd = vEndereco.processar(fornecedor.getEndereco());
+		
+		if(validacaoEnd != null) {
+			sb.append(validacaoEnd);
+		}				
+			
+		if(sb.length()==0)
+			return null;
+		else
+			return sb.toString();
+	}
+}
+
+
