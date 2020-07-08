@@ -30,3 +30,38 @@ INNER JOIN endereco ON (endereco.id_endereco = (select x.fk_endereco_id_rel
 from fornecedor_endereco as x where x.fk_fornecedor_id_rel = fornecedor.codigo_fornecedor));
 
 
+
+select 
+e.nome_endereco, 
+e.tipo_endereco, 
+e.tipo_logradouro, 
+e.tipo_residencia, 
+e.logradouro_endereco, 
+e.numero_endereco, 
+e.bairro_endereco, 
+e.cep_endereco, 
+e.observacoes_endereco, 
+e.cidade_id, 
+e.dtcadastro,
+f.codigo_fornecedor,
+from endereco as e,
+inner join fornecedor as f on (f.codigo_fornecedor = (select fp.fk_fornecedor_id_rel
+from fornecedor_endereco as fp where fp.fk_endereco_id_rel = endereco.id_endereco));
+
+
+ "SELECT p.* " +
+                "FROM professores p, professores_cursos pc, cursos c " +
+                "WHERE c.curso = ? " +
+                "AND c.id_curso = pc.id_curso " +
+                "AND p.id_professor = pc.id_professor ";
+				
+				
+select e.*, f.codigo_fornecedor from  endereco e, fornecedor f, fornecedor_endereco fp where 
+fp.fk_fornecedor_id_rel = ? and e.endereco_id = fp.fk_endereco_id_rel 
+and fp.fk_fornecedor_id_rel = f.codigo_fornecedor;
+
+
+select f.* from  fornecedor f where 
+codigo_fornecedor = ? OR nome_fornecedor = ? cpf_fornecedor, data_nascimento_fornecedor, genero_fornecedor, produto_padrao_fornecedor, email_fornecedor, ranking_fornecedor
+
+
