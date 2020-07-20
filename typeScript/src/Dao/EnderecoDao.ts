@@ -38,9 +38,7 @@ export class EnderecoDao extends AbstractDao {
         );
         `)
         } catch (err) {
-            console.log(err)
-        } finally {
-            await AbstractDao.desconnectDB()
+            console.log(err.message)
         }
 
     }

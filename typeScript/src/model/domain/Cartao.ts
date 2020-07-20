@@ -1,7 +1,6 @@
 import {EntidadeDominio} from "./EntidadeDominio";
-import {Fornecedor} from "./Fornecedor";
 
-export class Cartao extends EntidadeDominio{
+export class Cartao extends EntidadeDominio {
 
     constructor(
         private numeroCartao: string,
@@ -9,7 +8,9 @@ export class Cartao extends EntidadeDominio{
         private bandeiraCartao: string,
         private codigoSegCartao: number,
         private fornecedorId: string
-    ) {super();}
+    ) {
+        super();
+    }
 
 
     public getfornecedorId(): string {
@@ -19,6 +20,7 @@ export class Cartao extends EntidadeDominio{
     public setfornecedorId(fornecedorId: string): void {
         this.fornecedorId = fornecedorId;
     }
+
     public getNumeroCartao(): string {
         return this.numeroCartao;
     }

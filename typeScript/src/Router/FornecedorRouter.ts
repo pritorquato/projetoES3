@@ -8,5 +8,5 @@ import {TelefoneControl} from "../Control/TelefoneControl";
 export const fornecedorRouter = express.Router();
 
 fornecedorRouter.post("/signup", new FornecedorControl().signup)
-fornecedorRouter.post("/add-cartao",new CartaoControl().createCartao)
-fornecedorRouter.post("/add-telefone",new TelefoneControl().createTelefone)
+fornecedorRouter.post("/add-cartao", new CartaoControl().createCartao)
+fornecedorRouter.post("/add-telefone", new TelefoneControl().createTelefone)

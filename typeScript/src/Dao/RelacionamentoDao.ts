@@ -24,9 +24,9 @@ export class RelacionamentoDao extends AbstractDao {
 
         const produto = await new ProdutoDao().consultarProdutos(id)
         const fornecedor = await new FornecedorDao().consultarFornecedor(id)
-
-        if (produto) {
-            await super.setConnection().raw(`
+        try {
+            if (produto) {
+                await super.setConnection().raw(`
         INSERT INTO ${RelacionamentoDao.TABLE_NAME_PRODUTO} ( 
          fk_endereco_entrega_id, 
          fk_produto_id
@@ -36,9 +36,8 @@ export class RelacionamentoDao extends AbstractDao {
         "${id}"
         );
         `)
-            await AbstractDao.desconnectDB()
-        } else if (fornecedor) {
-            await super.setConnection().raw(`
+            } else if (fornecedor) {
+                await super.setConnection().raw(`
         INSERT INTO ${RelacionamentoDao.TABLE_NAME_FORNECEDOR} ( 
          fk_fornecedor_id_rel,
          fk_endereco_id_rel
@@ -48,14 +47,18 @@ export class RelacionamentoDao extends AbstractDao {
         "${enderecoId}"
         );
         `)
-            await AbstractDao.desconnectDB()
+
+            }
+        } catch (err) {
+            console.log("salvar relacionamentos" + err.message)
         }
+
     }
 
     public async salvarRelacionamentoFP(fornecedorId: string, produtoId: string): Promise<void> {
 
-
-        await super.setConnection().raw(`
+        try {
+            await super.setConnection().raw(`
         INSERT INTO ${RelacionamentoDao.TABLE_NAME_FORNECEDOR_PRODUTO} ( 
          fk_fornecedor_id, 
          fk_produto_id_fp
@@ -65,8 +68,13 @@ export class RelacionamentoDao extends AbstractDao {
         "${produtoId}"
         );
         `)
-        await AbstractDao.desconnectDB()
+        } catch (err) {
+            console.log("salvar relacionamentos" + err.message)
+        }
+
+
     }
+
     public async consultarProdutos(id: string | undefined): Promise<any> {
 
         if (id) {
@@ -104,6 +112,7 @@ export class RelacionamentoDao extends AbstractDao {
 
         }
     }
+
     public async consultarEnderecos(id: string | undefined): Promise<any> {
 
         if (id) {

@@ -1,7 +1,7 @@
 import {Request, Response} from "express";
 import {IdGenerator} from "../services/IdGenerator";
 import {Cartao} from "../model/domain/Cartao";
-import {CartaoDao} from "../Dao/CartaoDao";
+import {Facade} from "../Facade/Facade";
 
 export class CartaoControl {
 
@@ -9,7 +9,7 @@ export class CartaoControl {
         try {
 
             const cartao = new Cartao(
-               req.body.numero_cartao,
+                req.body.numero_cartao,
                 req.body.nome_cartao,
                 req.body.bandeira_cartao,
                 req.body.codigo_seguranca_cartao,
@@ -18,11 +18,15 @@ export class CartaoControl {
             cartao.setId(await new IdGenerator().createID())
             cartao.setDtCadastro("data")
 
-            await new CartaoDao().salvar(cartao)
-            res.status(200).send({menssagem: "cartao criado!"});
+            let result = await new Facade().salvar(cartao)
+            if (result.length > 0) {
+                res.status(200).send({Erro: result});
+            } else {
+                res.status(200).send({menssagem: "Cartao criado!"});
+            }
 
         } catch (err) {
-            res.status(400).send({err: err});
+            res.status(400).send({err: err.message});
         }
     }
 

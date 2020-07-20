@@ -18,6 +18,7 @@ export class PaisDao extends AbstractDao {
     public async consultar(): Promise<any> {
 
     }
+
     public async consultarTodosPaises(): Promise<any> {
         try {
             const response = await super.setConnection()

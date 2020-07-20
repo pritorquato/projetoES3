@@ -3,15 +3,15 @@ import {Fornecedor} from "../model/domain/Fornecedor";
 import {CartaoDao} from "./CartaoDao";
 import {TelefoneDao} from "./TelefoneDao";
 import {EnderecoDao} from "./EnderecoDao";
-import {IdGenerator} from "../services/IdGenerator";
 import {RelacionamentoDao} from "./RelacionamentoDao";
+import {HashManager} from "../services/HashManager";
 
 
 export class FornecedorDao extends AbstractDao {
     private static TABLE_NAME = "fornecedor"
 
     public async salvar(fornecedor: Fornecedor): Promise<void> {
-
+        const senhaCripto = await new HashManager().hash(fornecedor.getSenha())
         await super.setConnection().raw(`
         INSERT INTO ${FornecedorDao.TABLE_NAME} (
         codigo_fornecedor,
@@ -36,10 +36,45 @@ export class FornecedorDao extends AbstractDao {
         "${fornecedor.getEmail()}",
         "${fornecedor.getRank()}",
         1,
-        "${fornecedor.getSenha()}",
+        "${senhaCripto}",
         "${fornecedor.getDtCadastro()}");
         `)
-        AbstractDao.desconnectDB()
+
+        fornecedor.getEnderecos().forEach(endereco => {
+            try {
+                new EnderecoDao().salvar(endereco)
+            } catch (e) {
+                console.log("fornecedorDao save endereco:" + e.message);
+            }
+            try {
+                new RelacionamentoDao().salvarRelacionamento(fornecedor.getId(), endereco.getId())
+            } catch (e) {
+                console.log("fornecedorDao save relacionamento:" + e.message);
+            }
+        })
+
+        fornecedor.getCartoes().forEach(cartao => {
+            try {
+                new CartaoDao().salvar(cartao)
+            } catch (e) {
+                console.log("fornecedorDao save cartao:" + e.message);
+            }
+        })
+        fornecedor.getTelefones().forEach(telefone => {
+            try {
+                new TelefoneDao().salvar(telefone)
+            } catch (e) {
+                console.log("fornecedorDao save telefone:" + e.message);
+            }
+        })
+        fornecedor.getProdutos().forEach(produt => {
+            try {
+                new RelacionamentoDao().salvarRelacionamentoFP(fornecedor.getId(), produt)
+            } catch (e) {
+                console.log("fornecedorDao save relacionamentoFp:" + e.message);
+            }
+        })
+
     }
 
 
@@ -71,7 +106,7 @@ export class FornecedorDao extends AbstractDao {
         AbstractDao.desconnectDB()
     }
 
-    public async alterarSenha(id: string,senha: string): Promise<void> {
+    public async alterarSenha(id: string, senha: string): Promise<void> {
         await super.setConnection().raw(`
         UPDATE ${FornecedorDao.TABLE_NAME} 
         SET
@@ -80,12 +115,14 @@ export class FornecedorDao extends AbstractDao {
         `)
         AbstractDao.desconnectDB()
     }
-    public async consultar(fornecedor: Fornecedor): Promise<void> {}
+
+    public async consultar(fornecedor: Fornecedor): Promise<void> {
+    }
 
     public async consultarFornecedor(id: string | undefined): Promise<any> {
         let response
         let fornecedorData = []
-        if (id !== undefined ) {
+        if (id !== undefined) {
             response = await super.setConnection()
                 .select("*")
                 .into(FornecedorDao.TABLE_NAME)

@@ -8,9 +8,9 @@ export class ProdutoControl {
 
     public async addProduto(req: Request, res: Response) {
         try {
-                const produto = new Produto(
-                    req.body.descricao
-                );
+            const produto = new Produto(
+                req.body.descricao
+            );
             produto.setId(await new IdGenerator().createID())
             produto.setDtCadastro("data")
 
@@ -19,7 +19,7 @@ export class ProdutoControl {
             res.status(200).send({menssagem: "produto criado!"});
 
         } catch (err) {
-            res.status(400).send({err: err});
+            res.status(400).send({err: err.message});
         }
     }
 

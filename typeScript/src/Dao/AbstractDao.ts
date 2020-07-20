@@ -8,8 +8,9 @@ dotenv.config();
 
 export abstract class AbstractDao implements IDao {
     private static CONNECTION_KNEX: Knex | null = null
+
     protected setConnection() {
-        if(AbstractDao.CONNECTION_KNEX === null){
+        if (AbstractDao.CONNECTION_KNEX === null) {
             AbstractDao.CONNECTION_KNEX = knex({
                 client: "mysql",
                 connection: {
@@ -24,8 +25,9 @@ export abstract class AbstractDao implements IDao {
         }
         return AbstractDao.CONNECTION_KNEX
     }
-    public static async desconnectDB(){
-        if(AbstractDao.CONNECTION_KNEX !== null){
+
+    public static async desconnectDB() {
+        if (AbstractDao.CONNECTION_KNEX !== null) {
             await AbstractDao.CONNECTION_KNEX.destroy()
             AbstractDao.CONNECTION_KNEX = null
         }
@@ -45,6 +47,6 @@ export abstract class AbstractDao implements IDao {
 
     abstract inativar(entidade: EntidadeDominio): void
 
-    abstract consultar(entidade: EntidadeDominio|undefined): any
+    abstract consultar(entidade: EntidadeDominio | undefined): any
 
 }

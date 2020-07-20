@@ -17,6 +17,7 @@ export class Estado {
         this.descricaoEstado = descricao;
         this.paisEstado = pais;
     }
+
     public getId(): number {
         return this.id;
     }
@@ -37,7 +38,7 @@ export class Estado {
         return this.descricaoEstado;
     }
 
-    public setDescricao(descricao:string): void {
+    public setDescricao(descricao: string): void {
         this.descricaoEstado = descricao;
     }
 

@@ -1,7 +1,7 @@
-import { uuid  } from "uuidv4";
+import {uuid} from "uuidv4";
 
 export class IdGenerator {
-  public createID():string{
-    return uuid ();
-  }
+    public createID(): string {
+        return uuid();
+    }
 }

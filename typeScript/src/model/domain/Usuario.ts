@@ -1,8 +1,8 @@
 export class Usuario {
 
-    private idUsuario: number=0;
+    private idUsuario: number = 0;
 
-    private senhaUsuario: string="";
+    private senhaUsuario: string = "";
 
 
     public cadastrarUsuario(): void {

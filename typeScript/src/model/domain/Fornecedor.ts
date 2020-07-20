@@ -45,27 +45,37 @@ export class Fornecedor extends EntidadeDominio {
     getProdutos() {
         return this.produtosForn;
     }
-    addProduto(produto: string){
+
+    addProduto(produto: string) {
         this.produtosForn.push(produto);
     }
 
     getCartoes() {
         return this.cartaoForn;
     }
-    addCartao(cartao: Cartao){
+
+    addCartao(cartao: Cartao) {
         this.cartaoForn.push(cartao);
     }
+
     getTelefones() {
         return this.telefoneForn;
     }
-    addTelefones(telefones: Telefone){
+
+    addTelefones(telefones: Telefone) {
         this.telefoneForn.push(telefones);
     }
+
     getEnderecos() {
         return this.enderecoForn;
     }
+
     addEnderecos(endereco: Endereco) {
         this.enderecoForn.push(endereco);
+    }
+
+    clearEnderecos() {
+        this.enderecoForn = []
     }
 
     getName() {
@@ -79,7 +89,8 @@ export class Fornecedor extends EntidadeDominio {
     getData() {
         return this.dataNascForn
     }
-    getSenha(){
+
+    getSenha() {
         return this.senhaForn
     }
 
@@ -98,10 +109,12 @@ export class Fornecedor extends EntidadeDominio {
     getRank() {
         return this.rankingForn
     }
-    getStatus(){
+
+    getStatus() {
         return this.status_ativo
     }
-    setStatus(status:boolean):void{
+
+    setStatus(status: boolean): void {
         this.status_ativo = status;
     }
 }

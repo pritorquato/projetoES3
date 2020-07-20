@@ -1,7 +1,6 @@
 import {AbstractDao} from "./AbstractDao";
 
 
-
 export class CidadeDao extends AbstractDao {
     private static TABLE_NAME = "cidade"
 
@@ -20,6 +19,7 @@ export class CidadeDao extends AbstractDao {
     public async consultar(): Promise<any> {
 
     }
+
     public async consultarTodasCidade(): Promise<any> {
         try {
             const response = await super.setConnection()

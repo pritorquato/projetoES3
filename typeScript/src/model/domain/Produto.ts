@@ -7,10 +7,12 @@ export class Produto extends EntidadeDominio {
     ) {
         super();
     }
+
     public getDescricao(): string {
-       return this.descricao
+        return this.descricao
     }
+
     public setDescricao(descricao: string) {
-         this.descricao = descricao;
+        this.descricao = descricao;
     }
 }

@@ -21,19 +21,20 @@ export class ConsultasControl {
             res.status(400).send({err: err});
         }
     }
+
     public async consultarFornecedores(req: Request, res: Response) {
         try {
-                let id = undefined
-                if(req.body.id){
-                     id = req.body.id
-                }
-            const result =await new FornecedorDao().consultarFornecedor(id)
+            let id = undefined
+            if (req.body.id) {
+                id = req.body.id
+            }
+            const result = await new FornecedorDao().consultarFornecedor(id)
             res.status(200).send({
-                Fornecedores:result
+                Fornecedores: result
             });
 
         } catch (err) {
-            res.status(400).send({err: err});
+            res.status(400).send({err: err.message});
         }
     }
 

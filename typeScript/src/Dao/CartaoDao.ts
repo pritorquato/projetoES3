@@ -1,6 +1,5 @@
 import {AbstractDao} from "./AbstractDao";
 import {Cartao} from "../model/domain/Cartao";
-import {Fornecedor} from "../model/domain/Fornecedor";
 
 
 export class CartaoDao extends AbstractDao {
@@ -25,7 +24,6 @@ export class CartaoDao extends AbstractDao {
         "${cartao.getfornecedorId()}",
         "${cartao.getDtCadastro()}");
         `)
-        await AbstractDao.desconnectDB()
     }
 
     public async alterar(): Promise<void> {
@@ -35,11 +33,13 @@ export class CartaoDao extends AbstractDao {
     public async inativar(): Promise<void> {
 
     }
-    public async consultar(): Promise<any> {}
 
-    public async consultarCartoes(id: string| undefined): Promise<any> {
+    public async consultar(): Promise<any> {
+    }
 
-        if(id){
+    public async consultarCartoes(id: string | undefined): Promise<any> {
+
+        if (id) {
             const response = await super.setConnection()
                 .select("*")
                 .into(CartaoDao.TABLE_NAME)
@@ -61,7 +61,7 @@ export class CartaoDao extends AbstractDao {
 
                 return cartaoData
             }
-        }else{
+        } else {
             const response = await super.setConnection()
                 .select("*")
                 .into(CartaoDao.TABLE_NAME)

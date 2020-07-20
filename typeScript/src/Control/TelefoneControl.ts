@@ -22,7 +22,7 @@ export class TelefoneControl {
             res.status(200).send({menssagem: "telefone criado!"});
 
         } catch (err) {
-            res.status(400).send({err: err});
+            res.status(400).send({err: err.message});
         }
     }
 

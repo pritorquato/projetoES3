@@ -1,9 +1,7 @@
-
-
 export class EntidadeDominio {
 
-        private id: string = ""
-        private dtCadastro: string =""
+    private id: string = ""
+    private dtCadastro: string = ""
 
 
     public getId(): string {

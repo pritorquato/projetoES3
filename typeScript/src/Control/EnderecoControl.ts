@@ -3,6 +3,7 @@ import {IdGenerator} from "../services/IdGenerator";
 import {Endereco} from "../model/domain/Endereco";
 import {EnderecoDao} from "../Dao/EnderecoDao";
 import {RelacionamentoDao} from "../Dao/RelacionamentoDao";
+import {AbstractDao} from "../Dao/AbstractDao";
 
 export class EnderecoControl {
 
@@ -25,12 +26,14 @@ export class EnderecoControl {
             endereco.setDtCadastro("data")
 
             await new EnderecoDao().salvar(endereco)
-            await new RelacionamentoDao().salvarRelacionamento(req.body.id,endereco.getId())
+            await new RelacionamentoDao().salvarRelacionamento(req.body.id, endereco.getId())
 
             res.status(200).send({menssagem: "Endereço criado!"});
 
         } catch (err) {
-            res.status(400).send({err: err});
+            res.status(400).send({err: err.message});
+        } finally {
+            await AbstractDao.desconnectDB()
         }
     }
 

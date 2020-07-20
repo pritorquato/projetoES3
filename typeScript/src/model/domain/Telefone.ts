@@ -1,5 +1,4 @@
 import {EntidadeDominio} from "./EntidadeDominio";
-import {Fornecedor} from "./Fornecedor";
 
 export class Telefone extends EntidadeDominio {
     constructor(

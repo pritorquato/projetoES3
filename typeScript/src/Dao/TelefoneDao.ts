@@ -1,6 +1,5 @@
 import {AbstractDao} from "./AbstractDao";
 import {Telefone} from "../model/domain/Telefone";
-import {Fornecedor} from "../model/domain/Fornecedor";
 
 
 export class TelefoneDao extends AbstractDao {
@@ -24,10 +23,6 @@ export class TelefoneDao extends AbstractDao {
         "${telefone.getDtCadastro()}",
         "${telefone.getFornecedorId()}")
         `)
-
-
-        await AbstractDao.desconnectDB()
-
     }
 
     public async alterar(): Promise<void> {
@@ -37,10 +32,13 @@ export class TelefoneDao extends AbstractDao {
     public async inativar(): Promise<void> {
 
     }
-    public async consultar(): Promise<any>{}
+
+    public async consultar(): Promise<any> {
+    }
+
     public async consultarTelefones(id: string): Promise<any> {
 
-        if(id){
+        if (id) {
             try {
                 const response = await super.setConnection()
                     .select("*")
@@ -65,7 +63,7 @@ export class TelefoneDao extends AbstractDao {
             } catch (err) {
                 console.log(err)
             }
-        }else {
+        } else {
             try {
                 const response = await super.setConnection()
                     .select("*")

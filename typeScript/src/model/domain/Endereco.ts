@@ -1,6 +1,4 @@
 import {EntidadeDominio} from "./EntidadeDominio";
-import {Cidade} from "./Cidade";
-import {Fornecedor} from "./Fornecedor";
 
 export class Endereco extends EntidadeDominio {
     constructor(
